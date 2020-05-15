@@ -4,14 +4,18 @@ CialoNiebieskie::CialoNiebieskie() {
 	Nazwa[12] = {'S'};
 	Masa = rand();
 	Promien = rand();
+	Pozycja.x = rand();
+	Pozycja.y = rand();
 
 
 };
 
 
-double* CialoNiebieskie::getPozycja()
+
+
+Vec2 CialoNiebieskie::getPozycja()
 {
-	return nullptr;
+	return Vec2();
 }
 
 double CialoNiebieskie::getMasa()

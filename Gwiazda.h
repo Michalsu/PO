@@ -1,6 +1,6 @@
 #pragma once
 #include "CialoNiebieskie.h"
-#include <iostream>
+
 class Gwiazda :
 	public CialoNiebieskie
 {

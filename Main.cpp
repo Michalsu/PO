@@ -6,6 +6,7 @@
 #include "PlanetaGazowa.h"
 #include "PlanetaSkalista.h"
 #include "Planetoida.h"
+#include "Vec2.h"
 
 #include<iostream>
 #include<stdlib.h>

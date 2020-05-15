@@ -3,6 +3,7 @@
 #define CIALONIEBIESKIE_H_
 #include<iostream>
 #include<stdlib.h>
+#include "Vec2.h"
 
 
 class CialoNiebieskie
@@ -11,12 +12,12 @@ private:
 	double Masa;
 	double Promien;
 	char Nazwa[32];
-	double Pozycja[2] = {0, 0};
+	Vec2 Pozycja;
 	
 public:
 	CialoNiebieskie();
 
-	double* getPozycja();
+	Vec2 getPozycja();
 	double getMasa();
 	double getPromien();
 };
