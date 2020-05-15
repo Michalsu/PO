@@ -1,7 +1,13 @@
 #pragma once
 #include "Gwiazda.h"
+#include<iostream>
 class GwiazdaZdegradowana :
-	private Gwiazda
+	public Gwiazda
 {
+private:
+	double Promieniowanie;
+public:
+	double getPromieniowanie();
+
 };
 

@@ -1,7 +1,11 @@
 #pragma once
 #include "Gwiazda.h"
 class GwiazdaZyjaca :
-	private Gwiazda
+	public Gwiazda
 {
+private:
+	char TypGwiazdy[];
+public:
+	char* getTypGwiazdy();
 };
 

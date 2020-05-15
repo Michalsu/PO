@@ -1,7 +1,13 @@
 #pragma once
 #include "CialoNiebieskie.h"
 class Planetoida :
-	private CialoNiebieskie
+	public CialoNiebieskie
 {
+private:
+	bool RzadkiePierwiastki;
+	double Predkosc[2];
+public:
+	double* getPredkosc();
+	bool getRzadkiePierwiastki();
 };
 

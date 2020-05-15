@@ -1,7 +1,16 @@
 #pragma once
 #include "Planeta.h"
 class PlanetaSkalista :
-	private Planeta
+	public Planeta
 {
+private:
+	bool Woda;
+	int SredniaTemp;
+	double WspolczynnikKolonizacji;
+public:
+	double LiczWspolczynnikKolonizacji();
+	int getSredniaTemp();
+	bool getWoda();
+	double getWspolczynnikKolonizacji();
 };
 

@@ -2,21 +2,22 @@ cmake_minimum_required(VERSION "3.17")
 
 project("Solaris")
 
-add_library(
-	Ciala 
+add_library(Ciala 
 	CialoNiebieskie.cpp
-	CialoNiebieskie.h
 	Gwiazda.cpp
-	Gwiazda.h
 	GwiazdaZdegradowana.cpp
-	GwiazdaZdegradowana.h
+	GwiazdaZyjaca.cpp
 	Planeta.cpp
-	Planeta.h
 	PlanetaGazowa.cpp
-	PlanetaGazowa.h
 	PlanetaSkalista.cpp
-	PlanetaSkalista.h
 	Planetoida.cpp
+	CialoNiebieskie.h
+	Gwiazda.h
+	GwiazdaZdegradowana.h	
+	GwiazdaZyjaca.h	
+	Planeta.h	
+	PlanetaGazowa.h	
+	PlanetaSkalista.h	
 	Planetoida.h)
 add_executable("${PROJECT_NAME}" "Main.cpp")
 target_link_libraries("${PROJECT_NAME}" PRIVATE Ciala)

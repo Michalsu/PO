@@ -1,6 +1,14 @@
 #include "Gwiazda.h"
 
-void Gwiazda::HelloG()
+
+
+
+Gwiazda::Gwiazda()
 {
-	std::cout << "Jestem gwiazda\n";
+	Temperatura = 12; //// Temperatura obliczana na podstawie promienia i masy gwiazdy
+}
+
+int Gwiazda::getTemperatura()
+{
+	return int(Temperatura);
 }

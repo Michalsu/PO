@@ -1,9 +1,25 @@
 #include "CialoNiebieskie.h"
-#include<iostream>
+
+CialoNiebieskie::CialoNiebieskie() {
+	Nazwa[12] = {'S'};
+	Masa = rand();
+	Promien = rand();
 
 
+};
 
-void CialoNiebieskie::Hello()
+
+double* CialoNiebieskie::getPozycja()
 {
-	std::cout << "Hello Cialo Niebieskie\n";
+	return nullptr;
+}
+
+double CialoNiebieskie::getMasa()
+{
+	return Masa;
+}
+
+double CialoNiebieskie::getPromien()
+{
+	return Promien;
 }

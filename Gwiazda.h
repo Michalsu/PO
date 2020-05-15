@@ -2,9 +2,14 @@
 #include "CialoNiebieskie.h"
 #include <iostream>
 class Gwiazda :
-	private CialoNiebieskie
+	public CialoNiebieskie
 {
+private:
+	int Temperatura;
+	
 public:
-	void HelloG();
+	Gwiazda();
+	int getTemperatura();
+
 };
 

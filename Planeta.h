@@ -1,7 +1,15 @@
 #pragma once
 #include "CialoNiebieskie.h"
 class Planeta :
-	private CialoNiebieskie
+	public CialoNiebieskie
 {
+private:
+	int CzasObieguGwiazdy;
+	double Predkosc[2];
+	double Grawitacja;
+public:
+	double getGrawitacja();
+	double* getPredkosc();
+	int getCzasObieguGwiazdy();
 };
 
