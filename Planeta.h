@@ -5,11 +5,13 @@ class Planeta :
 {
 private:
 	int CzasObieguGwiazdy;
-	double Predkosc[2];
+	double PredkoscX;
+	double PredkoscY;
 	double Grawitacja;
 public:
 	double getGrawitacja();
-	double* getPredkosc();
+	double getPredkoscX();
+	double getPredkoscY();
 	int getCzasObieguGwiazdy();
 };
 

@@ -1,8 +1,15 @@
 #include "Planetoida.h"
 
-double* Planetoida::getPredkosc()
+
+
+double Planetoida::getPredkoscX()
 {
-	return nullptr;
+	return PredkoscX;
+}
+
+double Planetoida::getPredkoscY()
+{
+	return PredkoscY;
 }
 
 bool Planetoida::getRzadkiePierwiastki()

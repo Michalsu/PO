@@ -5,9 +5,11 @@ class Planetoida :
 {
 private:
 	bool RzadkiePierwiastki;
-	double Predkosc[2];
+	double PredkoscX;
+	double PredkoscY;
 public:
-	double* getPredkosc();
+	double getPredkoscX();
+	double getPredkoscY();
 	bool getRzadkiePierwiastki();
 };
 

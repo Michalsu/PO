@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION "3.17")
 
 project("Solaris")
 
-add_executable("${PROJECT_NAME}" "Main.cpp" 
+add_executable("${PROJECT_NAME}" "Main.cpp" "Main.h"
 	CialoNiebieskie.cpp
 	Gwiazda.cpp
 	GwiazdaZdegradowana.cpp
@@ -19,8 +19,6 @@ add_executable("${PROJECT_NAME}" "Main.cpp"
 	PlanetaGazowa.h	
 	PlanetaSkalista.h	
 	Planetoida.h
-	Vec2.cpp 
-	Vec2.h
 )
 
 

@@ -5,9 +5,14 @@ double Planeta::getGrawitacja()
 	return Grawitacja;
 }
 
-double* Planeta::getPredkosc()
+double Planeta::getPredkoscX()
 {
-	return nullptr;
+	return PredkoscX;
+}
+
+double Planeta::getPredkoscY()
+{
+	return PredkoscY;
 }
 
 int Planeta::getCzasObieguGwiazdy()

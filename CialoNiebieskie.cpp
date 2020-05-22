@@ -3,19 +3,21 @@
 CialoNiebieskie::CialoNiebieskie() {
 	Nazwa[12] = {'S'};
 	Masa = rand();
-	Promien = rand();
-	Pozycja.x = rand();
-	Pozycja.y = rand();
-
-
+	Promien = 5000*rand() % 700000000;
+	PozycjaX = rand();
+	PozycjaY = rand();
 };
 
 
 
 
-Vec2 CialoNiebieskie::getPozycja()
+double CialoNiebieskie::getPozycjaX()
 {
-	return Vec2();
+	return PozycjaX;
+}
+double CialoNiebieskie::getPozycjaY()
+{
+	return PozycjaY;
 }
 
 double CialoNiebieskie::getMasa()
