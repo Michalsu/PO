@@ -11,6 +11,8 @@ add_executable("${PROJECT_NAME}" "Main.cpp" "Main.h"
 	PlanetaGazowa.cpp
 	PlanetaSkalista.cpp
 	Planetoida.cpp
+	UkladPlanetarny.cpp
+
 	CialoNiebieskie.h
 	Gwiazda.h
 	GwiazdaZdegradowana.h	
@@ -19,25 +21,5 @@ add_executable("${PROJECT_NAME}" "Main.cpp" "Main.h"
 	PlanetaGazowa.h	
 	PlanetaSkalista.h	
 	Planetoida.h
+	UkladPlanetarny.h
 )
-
-
-install(TARGETS "${PROJECT_NAME}" DESTINATION ${CMAKE_INSTALL_PREFIX}/bin) 
-install(FILES "Main.cpp" 
-	CialoNiebieskie.cpp
-	Gwiazda.cpp
-	GwiazdaZdegradowana.cpp
-	GwiazdaZyjaca.cpp
-	Planeta.cpp
-	PlanetaGazowa.cpp
-	PlanetaSkalista.cpp
-	Planetoida.cpp
-	CialoNiebieskie.h
-	Gwiazda.h
-	GwiazdaZdegradowana.h	
-	GwiazdaZyjaca.h	
-	Planeta.h	
-	PlanetaGazowa.h	
-	PlanetaSkalista.h	
-	Planetoida.h
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/src)

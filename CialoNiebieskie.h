@@ -1,18 +1,13 @@
-
-#ifndef CIALONIEBIESKIE_H_
-#define CIALONIEBIESKIE_H_
+#pragma once
 #include<iostream>
 #include<stdlib.h>
-#include <string>
-
-
 
 class CialoNiebieskie
 {
 private:
 	double Masa;
 	double Promien;
-	std::string Nazwa;
+	char Nazwa[32];
 	double PozycjaX;
 	double PozycjaY;
 	
@@ -24,5 +19,3 @@ public:
 	double getMasa();
 	double getPromien();
 };
-
-#endif /* CIALONIEBIESKIE_H_ */

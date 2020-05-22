@@ -1,6 +1,7 @@
 #include "GwiazdaZyjaca.h"
 
-std::string GwiazdaZyjaca::getTypGwiazdy()
+char* GwiazdaZyjaca::getTypGwiazdy()
 {
+	
 	return TypGwiazdy;
 }

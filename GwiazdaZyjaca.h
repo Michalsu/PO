@@ -4,8 +4,8 @@ class GwiazdaZyjaca :
 	public Gwiazda
 {
 private:
-	std::string TypGwiazdy;
+	char TypGwiazdy[32];
 public:
-	std::string getTypGwiazdy();
+	char* getTypGwiazdy();
 };
 
