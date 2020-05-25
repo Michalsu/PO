@@ -15,7 +15,7 @@ int PlanetaSkalista::getSredniaTemp()
 
 bool PlanetaSkalista::getWoda()
 {
-	return false;
+	return Woda;
 }
 
 double PlanetaSkalista::getWspolczynnikKolonizacji()

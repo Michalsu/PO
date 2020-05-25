@@ -10,8 +10,8 @@
 
 #include<iostream>
 #include<stdlib.h>
-#include <list>
 #include <vector>
+#include <cmath>
 
 class UkladPlanetarny
 {
@@ -19,12 +19,14 @@ private:
 
 	char NazwaUkladu[32];
 	unsigned long long int czas;
-	std::list <Gwiazda*> listaGwiazd;
-	std::list <Planeta*> listaPlanet;
-	std::list <Planetoida*> listaPlanetoid;
+	std::vector <CialoNiebieskie*> listaCial;
 
+	
 
 public:
-
+	void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*>& listaPlanet);
+	void UkladPlanetarny::AktualizujPredkosc(std::vector<CialoNiebieskie*>& listaPlanet);
+	void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaPlanet);
+	void UkladPlanetarny::StworzUklad(std::vector<CialoNiebieskie*>* ciala, unsigned int IloscPlanet, unsigned int IloscPlanetoid);
 };
 
