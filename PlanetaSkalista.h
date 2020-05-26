@@ -8,6 +8,7 @@ private:
 	int SredniaTemp;
 	double WspolczynnikKolonizacji;
 public:
+	PlanetaSkalista();
 	double LiczWspolczynnikKolonizacji();
 	int getSredniaTemp();
 	bool getWoda();

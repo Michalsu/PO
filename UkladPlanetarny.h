@@ -21,12 +21,14 @@ private:
 	unsigned long long int czas;
 	std::vector <CialoNiebieskie*> listaCial;
 
+
 	
 
 public:
+	void UkladPlanetarny::InicjalizujListeCial(std::vector <std::vector<CialoNiebieskie*> > *pCiala);
 	void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*>& listaPlanet);
 	void UkladPlanetarny::AktualizujPredkosc(std::vector<CialoNiebieskie*>& listaPlanet);
 	void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaPlanet);
-	void UkladPlanetarny::StworzUklad(std::vector<CialoNiebieskie*>* ciala, unsigned int IloscPlanet, unsigned int IloscPlanetoid);
+	void UkladPlanetarny::StworzUklad(std::vector<CialoNiebieskie*>* ciala, unsigned int IloscPlanetSkalistych, unsigned int IloscPlanetGazowych, unsigned int IloscPlanetoid);
 };
 

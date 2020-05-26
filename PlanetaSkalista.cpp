@@ -1,5 +1,9 @@
 #include "PlanetaSkalista.h"
 
+PlanetaSkalista::PlanetaSkalista():Planeta()
+{
+}
+
 double PlanetaSkalista::LiczWspolczynnikKolonizacji()
 {
 	int temp=300;

@@ -7,7 +7,7 @@ CialoNiebieskie::CialoNiebieskie() {
 	PozycjaX = rand();
 	PozycjaY = rand();
 	PredkoscX = 0;
-	PredkoscX = 0;
+	PredkoscY = 0;
 	PrzyspieszenieX = 0;
 	PrzyspieszenieY = 0;
 
@@ -20,7 +20,7 @@ CialoNiebieskie::CialoNiebieskie(double masa, double promien)
 	PozycjaX = rand();
 	PozycjaY = rand();
 	PredkoscX = 0;
-	PredkoscX = 0;
+	PredkoscY = 0;
 	PrzyspieszenieX = 0;
 	PrzyspieszenieY = 0;
 
@@ -33,7 +33,7 @@ CialoNiebieskie::CialoNiebieskie(double masa, double promien, double pozycjax, d
 	PozycjaX = pozycjax;
 	PozycjaY = pozycjay;
 	PredkoscX = 0;
-	PredkoscX = 0;
+	PredkoscY = 0;
 	PrzyspieszenieX = 0;
 	PrzyspieszenieY = 0;
 }

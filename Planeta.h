@@ -9,6 +9,7 @@ private:
 	double Grawitacja;
 
 public:
+	Planeta();
 	double getGrawitacja();
 	int getCzasObieguGwiazdy();
 	
