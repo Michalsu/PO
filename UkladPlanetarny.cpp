@@ -47,15 +47,15 @@ void PoliczPrzyspieszenie(CialoNiebieskie* Pi, CialoNiebieskie* Pj)
 //	}
 //}
 
-void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*> &listaPlanet) {
+void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*> &listaCial) {
 	double przyspieszenieX = 0, przyspieszenieY = 0;
 
-	for (int i = 0; i < listaPlanet.size(); i++) {
-		listaPlanet[i]->setPrzyspieszenieX(0);
-		listaPlanet[i]->setPrzyspieszenieY(0);
-		for (int j = 0; j < listaPlanet.size(); j++) {
+	for (int i = 0; i < listaCial.size(); i++) {
+		listaCial[i]->setPrzyspieszenieX(0);
+		listaCial[i]->setPrzyspieszenieY(0);
+		for (int j = 0; j < listaCial.size(); j++) {
 			if (i != j) {
-				PoliczPrzyspieszenie(listaPlanet.at(i), listaPlanet.at(j));
+				PoliczPrzyspieszenie(listaCial.at(i), listaCial.at(j));
 			}
 		}
 		
@@ -64,17 +64,17 @@ void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*> &li
 	
 }
 
-void UkladPlanetarny::AktualizujPredkosc(std::vector<CialoNiebieskie*>& listaPlanet) {
-	for (int i = 0; i < listaPlanet.size(); i++) {
-		listaPlanet.at(i)->setPredkoscX(listaPlanet.at(i)->getPredkoscX() + listaPlanet.at(i)->getPrzyspieszenieX());
-		listaPlanet.at(i)->setPredkoscY(listaPlanet.at(i)->getPredkoscY() + listaPlanet.at(i)->getPrzyspieszenieY());
+void UkladPlanetarny::AktualizujPredkosc(std::vector<CialoNiebieskie*>& listaCial) {
+	for (int i = 0; i < listaCial.size(); i++) {
+		listaCial.at(i)->setPredkoscX(listaCial.at(i)->getPredkoscX() + listaCial.at(i)->getPrzyspieszenieX());
+		listaCial.at(i)->setPredkoscY(listaCial.at(i)->getPredkoscY() + listaCial.at(i)->getPrzyspieszenieY());
 	}
 }
 
-void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaPlanet) {
-	for (int i = 0; i < listaPlanet.size(); i++) {
-		listaPlanet.at(i)->setPozycjaX(listaPlanet.at(i)->getPozycjaX() + listaPlanet.at(i)->getPredkoscX());
-		listaPlanet.at(i)->setPozycjaY(listaPlanet.at(i)->getPozycjaY() + listaPlanet.at(i)->getPredkoscY());
+void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial) {
+	for (int i = 0; i < listaCial.size(); i++) {
+		listaCial.at(i)->setPozycjaX(listaCial.at(i)->getPozycjaX() + listaCial.at(i)->getPredkoscX());
+		listaCial.at(i)->setPozycjaY(listaCial.at(i)->getPozycjaY() + listaCial.at(i)->getPredkoscY());
 	}
 }
 ////dzia³ajaca prymitywna wersja
@@ -95,7 +95,7 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaPlan
 		 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaPlanetSkalistych.at(i)));
 	 }
 	 for (int i = 0; i < IloscPlanetGazowych; i++) {
-		 listaPlanetSkalistych.push_back(new PlanetaSkalista());
+		 listaPlanetGazowych.push_back(new PlanetaGazowa());
 		 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaPlanetSkalistych.at(i)));
 	 }
 	 for (int i = 0; i < IloscPlanetoid; i++) {
@@ -103,6 +103,60 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaPlan
 		 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaPlanetoid.at(i)));
 	 }
 		
+ }
+
+ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial,unsigned int& nObiektow)
+ {
+	 for (int i = 0; i < nObiektow; i++) {
+		 for (int j = 0; j < nObiektow; j++) {
+			 if (i != j) {
+
+				 double odleglosc = sqrt((listaCial.at(i)->getPozycjaX() - listaCial.at(j)->getPozycjaX())* (listaCial.at(i)->getPozycjaX() - listaCial.at(j)->getPozycjaX()) + 
+					 ( listaCial.at(i)->getPozycjaY() - listaCial.at(j)->getPozycjaY())* (listaCial.at(i)->getPozycjaY() - listaCial.at(j)->getPozycjaY()));
+				
+				 if (odleglosc < (listaCial.at(i)->getPromien() + listaCial.at(j)->getPromien())) {
+
+					 std::cout << "Kolizja 2 cial" << std::endl;
+
+					 if (listaCial.at(i)->getMasa() <= (listaCial.at(j)->getMasa() / 10)) {
+						 delete listaCial[i];
+						 listaCial.erase(listaCial.begin() + i);
+						 std::cout << "cialo "<<i<<" zniszczone" << std::endl;
+						 nObiektow-= 1;
+						 if (i > 0) i--;
+					 }
+					 else if (listaCial.at(i)->getMasa() >= (listaCial.at(j)->getMasa() * 10)) {
+						 delete listaCial[j];
+						 listaCial.erase(listaCial.begin() + j);
+						 std::cout << "cialo " << j << " zniszczone" << std::endl;
+						 nObiektow -= 1;
+						 if (j > 0) j--;
+					 }
+					 else {
+						 delete listaCial[i];
+						 delete listaCial[j];
+						 listaCial.erase(listaCial.begin() + i);
+						 listaCial.erase(listaCial.begin() + j);
+						 std::cout << "cialo " << i << " i " << j << " zniszczone"<< std::endl;
+						 nObiektow -= 2;
+						 if (i > 0) i--;
+						 if (i > 0) j--;
+					 }
+				 }
+			 }
+		 }
+
+	 }
+	 
+ }
+
+ void UkladPlanetarny::WypiszObiekty() {
+	 std::cout << "Gwiazdy zyjace:" << listaGwiazdZyjacych.size() << std::endl;
+	 std::cout << "Gwiazdy zdegradowane:" << listaGwiazdZdegradowanych.size() << std::endl;
+	 std::cout << "Planety skaliste:" << listaPlanetSkalistych.size() << std::endl;
+	 std::cout << "Planety gazowe:" << listaPlanetGazowych.size() << std::endl;
+	 std::cout << "Planetoidy:" << listaPlanetoid.size() << std::endl;
+	
  }
 
 

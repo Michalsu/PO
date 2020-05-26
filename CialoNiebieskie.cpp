@@ -3,7 +3,7 @@
 CialoNiebieskie::CialoNiebieskie() {
 	Nazwa[32] = {'S'};
 	Masa = rand();
-	Promien = ((double)rand() * (7000000000 - 1000000) / (double)RAND_MAX - 1000000);
+	Promien = ((double)rand() * double(7000 - 10) / (double)RAND_MAX - 10);
 	PozycjaX = rand();
 	PozycjaY = rand();
 	PredkoscX = 0;
