@@ -4,6 +4,7 @@ class PlanetaSkalista :
 	public Planeta
 {
 private:
+
 	bool Woda;
 	int SredniaTemp;
 	double WspolczynnikKolonizacji;

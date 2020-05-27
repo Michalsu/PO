@@ -7,6 +7,7 @@ class GwiazdaZdegradowana :
 private:
 	double Promieniowanie;
 public:
+	GwiazdaZdegradowana();
 	double getPromieniowanie();
 
 };

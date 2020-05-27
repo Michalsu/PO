@@ -1,8 +1,8 @@
 #include "CialoNiebieskie.h"
 
 CialoNiebieskie::CialoNiebieskie() {
-	Nazwa[0] = {'S'};
-	Masa = ((double)rand() * double(1E30) / (double)RAND_MAX - 1E10);
+	Nazwa[0] = {'C'};
+	Masa = ((double)rand() * double(1E5) / (double)RAND_MAX - 1E3);
 	Promien = ((double)rand() * double(7000 - 10) / (double)RAND_MAX - 10);
 	PozycjaX = rand();
 	PozycjaY = rand();

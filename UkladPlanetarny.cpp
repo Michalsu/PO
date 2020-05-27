@@ -120,7 +120,6 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 		 
 		 
 		 listaPlanetSkalistych.push_back(new PlanetaSkalista());
-		 //listaPlanetSkalistych.at(i)->se
 		 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaPlanetSkalistych.at(i)));
 	 }
 	 for (int i = 0; i < IloscPlanetGazowych; i++) {

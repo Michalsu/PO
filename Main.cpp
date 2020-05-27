@@ -18,7 +18,7 @@ srand((unsigned)time(NULL));
  std::cout << "Solar systems" << std::endl;
 
  double TempoSymulacji = 1.0;
- unsigned int nObiektow, nPlanetSkalistych=20, nPlanetGazowych=3, nPlanetoid=200;
+ unsigned int nObiektow, nPlanetSkalistych=5, nPlanetGazowych=0, nPlanetoid=20;
  nObiektow = nPlanetSkalistych + nPlanetGazowych + nPlanetoid;
 
  std::vector<CialoNiebieskie*> listaCialNiebieskich;
@@ -30,7 +30,7 @@ srand((unsigned)time(NULL));
      uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
      uklad.AktualizujPredkosc(listaCialNiebieskich);
      uklad.AktualizujPozycje(listaCialNiebieskich, TempoSymulacji);
-     if (i > 0) uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow);
+     if (i>0) uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow);
      if (i < 5 || i>900) {
          for (int i = 0; i < nObiektow; i++)
          {

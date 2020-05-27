@@ -4,10 +4,11 @@
 
 class CialoNiebieskie
 {
-private:
+protected:
 	double Masa;
 	double Promien;
 	char Nazwa[32];
+private:
 	double PozycjaX;
 	double PozycjaY;
 	double PredkoscX;

@@ -5,7 +5,6 @@ class Planeta :
 {
 private:
 	int CzasObieguGwiazdy;
-
 	double Grawitacja;
 
 public:

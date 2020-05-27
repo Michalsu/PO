@@ -6,6 +6,7 @@ class GwiazdaZyjaca :
 private:
 	char TypGwiazdy[32];
 public:
+	GwiazdaZyjaca();
 	char* getTypGwiazdy();
 };
 
