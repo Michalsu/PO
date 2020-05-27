@@ -7,6 +7,7 @@ private:
 	bool RzadkiePierwiastki;
 
 public:
+	Planetoida();
 	bool getRzadkiePierwiastki();
 };
 

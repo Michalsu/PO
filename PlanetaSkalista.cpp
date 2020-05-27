@@ -1,8 +1,14 @@
 #include "PlanetaSkalista.h"
 
-PlanetaSkalista::PlanetaSkalista():Planeta()
+PlanetaSkalista::PlanetaSkalista() :Planeta()
 {
+	if (rand() % 2) Woda = true;
+	SredniaTemp = 100;
+	WspolczynnikKolonizacji = 300;
+		if (Woda) WspolczynnikKolonizacji += 1500;
+
 }
+
 
 double PlanetaSkalista::LiczWspolczynnikKolonizacji()
 {

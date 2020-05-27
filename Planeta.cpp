@@ -2,6 +2,7 @@
 
 Planeta::Planeta():CialoNiebieskie()
 {
+	
 	CzasObieguGwiazdy = 0;
 	Grawitacja = 0;
 }

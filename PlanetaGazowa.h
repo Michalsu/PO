@@ -8,6 +8,7 @@ private:
 	bool Tlen;
 	bool Metan;
 public:
+	PlanetaGazowa();
 	bool getWodor();
 	bool getTlen();
 	bool getMetan();
