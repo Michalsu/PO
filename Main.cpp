@@ -18,7 +18,7 @@ srand((unsigned)time(NULL));
  std::cout << "Solar systems" << std::endl;
 
  double TempoSymulacji = 1.0;
- unsigned int nObiektow, nPlanetSkalistych=5, nPlanetGazowych=0, nPlanetoid=20;
+ unsigned int nObiektow, nPlanetSkalistych=20, nPlanetGazowych=5, nPlanetoid=100;
  nObiektow = nPlanetSkalistych + nPlanetGazowych + nPlanetoid;
 
  std::vector<CialoNiebieskie*> listaCialNiebieskich;
@@ -26,13 +26,13 @@ srand((unsigned)time(NULL));
  uklad.StworzUklad(&listaCialNiebieskich,nPlanetSkalistych,nPlanetGazowych,nPlanetoid);
 
  
- for (int i = 0; i < 901; i++) {
+ for (int i = 0; i < 10000; i++) {
      uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
      uklad.AktualizujPredkosc(listaCialNiebieskich);
      uklad.AktualizujPozycje(listaCialNiebieskich, TempoSymulacji);
      if (i>0) uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow);
-     if (i < 5 || i>900) {
-         for (int i = 0; i < nObiektow; i++)
+     if (!(i%500)) {
+         for (int i = 0; i < nObiektow+1; i++)
          {
              std::cout << "O" << i + 1 << " promien " << listaCialNiebieskich[i]->getPromien() << " masa " << listaCialNiebieskich[i]->getMasa() <<
                  " pozycjaX " << listaCialNiebieskich[i]->getPozycjaX() << " pozycjaY " << listaCialNiebieskich[i]->getPozycjaY() <<
@@ -40,7 +40,8 @@ srand((unsigned)time(NULL));
                  "PrzyspieszenieX " << listaCialNiebieskich[i]->getPrzyspieszenieX() << "PrzyspieszenieY" << listaCialNiebieskich[i]->getPrzyspieszenieY() << std::endl;
          }
          uklad.WypiszObiekty();
-         std::cout << nObiektow << std::endl;
+         std::cout << nObiektow+1 << std::endl;
+         
      }
  }
  

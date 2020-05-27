@@ -19,7 +19,6 @@ private:
 	
 public:
 	CialoNiebieskie();
-	CialoNiebieskie(char nazwa[32]);
 	CialoNiebieskie(double masa, double promien);
 	CialoNiebieskie(double masa, double promien, double pozycjax, double pozycjay);
 
@@ -31,6 +30,7 @@ public:
 	double getPredkoscY();
 	double getPrzyspieszenieX();
 	double getPrzyspieszenieY();
+	char* getNazwa();
 	void setPozycjaX(double x);
 	void setPozycjaY(double y);
 	void setPrzyspieszenieX(double x);

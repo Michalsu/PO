@@ -2,29 +2,15 @@
 
 CialoNiebieskie::CialoNiebieskie() {
 	Nazwa[0] = {'C'};
-	Masa = ((double)rand() * double(1E5) / (double)RAND_MAX - 1E3);
-	Promien = ((double)rand() * double(7000 - 10) / (double)RAND_MAX - 10);
-	PozycjaX = rand();
-	PozycjaY = rand();
+	Masa = ((double)rand() + 1E5 / (double)RAND_MAX *(1E8- 1E5));
+	Promien = 10000;
+	PozycjaX = -1E10 + ((double)rand() / (double)RAND_MAX * (1E10 - -1E10));
+	PozycjaY = -1E10 + ((double)rand() / (double)RAND_MAX * (1E10 - -1E10));
 	PredkoscX = 0;
 	PredkoscY = 0;
 	PrzyspieszenieX = 0;
 	PrzyspieszenieY = 0;
 
-}
-CialoNiebieskie::CialoNiebieskie(char nazwa[32])
-{
-	for (int i = 0; i < 31; i++) {
-		Nazwa[i] = nazwa[i];
-
-	}
-	Nazwa[31] = '\0';
-	PozycjaX = rand();
-	PozycjaY = rand();
-	PredkoscX = 0;
-	PredkoscY = 0;
-	PrzyspieszenieX = 0;
-	PrzyspieszenieY = 0;
 }
 CialoNiebieskie::CialoNiebieskie(double masa, double promien)
 {
@@ -123,4 +109,9 @@ double CialoNiebieskie::getPrzyspieszenieX()
 double CialoNiebieskie::getPrzyspieszenieY()
 {
 	return PrzyspieszenieY;
+}
+
+char* CialoNiebieskie::getNazwa()
+{
+	return Nazwa;
 }

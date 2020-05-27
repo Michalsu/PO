@@ -15,13 +15,13 @@ void PoliczPrzyspieszenie(CialoNiebieskie* Pi, CialoNiebieskie* Pj)
 {
 	double przyspieszenieGrawX=0, przyspieszenieOdsrodX=0, przyspieszenieGrawY=0, przyspieszenieOdsrodY=0;
 	double odlegloscX = Pj->getPozycjaX() - Pi->getPozycjaX();
-	if (odlegloscX != 0) {
+	if (odlegloscX < -100 || odlegloscX > 100) {
 		przyspieszenieGrawX = (_STALA_GRAWITACJI * Pj->getMasa() / (odlegloscX * odlegloscX));
 		przyspieszenieOdsrodX = (Pi->getPredkoscX() * Pi->getPredkoscX()) / odlegloscX;
 	}
 
 	double odlegloscY = Pj->getPozycjaY() - Pi->getPozycjaY();
-	if (odlegloscY != 0) {
+	if (odlegloscY < -100 || odlegloscY > 100) {
 		przyspieszenieGrawY = (_STALA_GRAWITACJI * Pj->getMasa() / (odlegloscY * odlegloscY));
 		przyspieszenieOdsrodY = (Pi->getPredkoscY() * Pi->getPredkoscY()) / odlegloscY;
 	}
@@ -151,7 +151,7 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 						 //delete listaCial[i];
 						 listaCial.erase(listaCial.begin() + i);
 						 UsunZListy(i);
-						 std::cout << "cialo "<<i<<" zniszczone" << std::endl;
+						 std::cout << "cialo "<<listaCial.at(i)->getNazwa() <<" zniszczone" << std::endl;
 						 nObiektow-= 1;
 						 if (i > 0) i--;
 					 }
@@ -159,7 +159,7 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 						 //delete listaCial[j];
 						 listaCial.erase(listaCial.begin() + j);
 						 UsunZListy(j);
-						 std::cout << "cialo " << j << " zniszczone" << std::endl;
+						 std::cout << "cialo " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						 nObiektow -= 1;
 						 if (j > 0) j--;
 					 }
@@ -170,7 +170,7 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 						 listaCial.erase(listaCial.begin() + j);
 						 UsunZListy(i);
 						 UsunZListy(j);
-						 std::cout << "cialo " << i << " i " << j << " zniszczone"<< std::endl;
+						 std::cout << "cialo " << listaCial.at(i)->getNazwa() << " i " << listaCial.at(j)->getNazwa() << " zniszczone"<< std::endl;
 						 nObiektow -= 2;
 						 if (i > 0) i--;
 						 if (i > 0) j--;
@@ -189,6 +189,7 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 	 std::cout << "Planety skaliste:" << listaPlanetSkalistych.size() << std::endl;
 	 std::cout << "Planety gazowe:" << listaPlanetGazowych.size() << std::endl;
 	 std::cout << "Planetoidy:" << listaPlanetoid.size() << std::endl;
+	 std::cout << "Temperatura gwiazdy:" << listaGwiazdZyjacych.at(0)->getTemperatura() << std::endl;
 	
  }
 
