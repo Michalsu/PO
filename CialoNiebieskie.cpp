@@ -2,17 +2,17 @@
 
 CialoNiebieskie::CialoNiebieskie() {
 	Nazwa[0] = {'C'};
-	Masa = ((double)rand() + 1E5 / (double)RAND_MAX *(1E8- 1E5));
+	Masa = ((long double)rand() + 1E5 / (long double)RAND_MAX *(1E8- 1E5));
 	Promien = 10000;
-	PozycjaX = -1E10 + ((double)rand() / (double)RAND_MAX * (1E10 - -1E10));
-	PozycjaY = -1E10 + ((double)rand() / (double)RAND_MAX * (1E10 - -1E10));
+	PozycjaX = -1E10 + ((long double)rand() / (long double)RAND_MAX * (1E10 - -1E10));
+	PozycjaY = -1E10 + ((long double)rand() / (long double)RAND_MAX * (1E10 - -1E10));
 	PredkoscX = 0;
 	PredkoscY = 0;
 	PrzyspieszenieX = 0;
 	PrzyspieszenieY = 0;
 
 }
-CialoNiebieskie::CialoNiebieskie(double masa, double promien)
+CialoNiebieskie::CialoNiebieskie(long double masa, long double promien)
 {
 	Nazwa[0] = { 'S' };
 	Masa = masa;
@@ -25,7 +25,7 @@ CialoNiebieskie::CialoNiebieskie(double masa, double promien)
 	PrzyspieszenieY = 0;
 
 }
-CialoNiebieskie::CialoNiebieskie(double masa, double promien, double pozycjax, double pozycjay)
+CialoNiebieskie::CialoNiebieskie(long double masa, long double promien, long double pozycjax, long double pozycjay)
 {
 	Nazwa[0] = { 'S' };
 	Masa = masa;
@@ -43,70 +43,70 @@ CialoNiebieskie::CialoNiebieskie(double masa, double promien, double pozycjax, d
 
 
 
-double CialoNiebieskie::getPozycjaX()
+long double CialoNiebieskie::getPozycjaX()
 {
 	return PozycjaX;
 }
-double CialoNiebieskie::getPozycjaY()
+long double CialoNiebieskie::getPozycjaY()
 {
 	return PozycjaY;
 }
 
-double CialoNiebieskie::getMasa()
+long double CialoNiebieskie::getMasa()
 {
 	return Masa;
 }
 
-double CialoNiebieskie::getPromien()
+long double CialoNiebieskie::getPromien()
 {
 	return Promien;
 }
 
-void CialoNiebieskie::setPozycjaX(double x)
+void CialoNiebieskie::setPozycjaX(long double x)
 {
 	PozycjaX = x;
 }
 
-void CialoNiebieskie::setPozycjaY(double y)
+void CialoNiebieskie::setPozycjaY(long double y)
 {
 	PozycjaY = y;
 }
 
-double CialoNiebieskie::getPredkoscX()
+long double CialoNiebieskie::getPredkoscX()
 {
 	return PredkoscX;
 }
 
-double CialoNiebieskie::getPredkoscY()
+long double CialoNiebieskie::getPredkoscY()
 {
 	return PredkoscY;
 }
-void CialoNiebieskie::setPrzyspieszenieX(double x)
+void CialoNiebieskie::setPrzyspieszenieX(long double x)
 {
 	PrzyspieszenieX = x;
 }
 
-void CialoNiebieskie::setPrzyspieszenieY(double y)
+void CialoNiebieskie::setPrzyspieszenieY(long double y)
 {
 	PrzyspieszenieY = y;
 }
 
-void CialoNiebieskie::setPredkoscX(double x)
+void CialoNiebieskie::setPredkoscX(long double x)
 {
 	PredkoscX = x;
 }
 
-void CialoNiebieskie::setPredkoscY(double y)
+void CialoNiebieskie::setPredkoscY(long double y)
 {
 	PredkoscY = y;
 }
 
-double CialoNiebieskie::getPrzyspieszenieX()
+long double CialoNiebieskie::getPrzyspieszenieX()
 {
 	return PrzyspieszenieX;
 }
 
-double CialoNiebieskie::getPrzyspieszenieY()
+long double CialoNiebieskie::getPrzyspieszenieY()
 {
 	return PrzyspieszenieY;
 }

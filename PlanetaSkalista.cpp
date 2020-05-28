@@ -4,8 +4,9 @@ PlanetaSkalista::PlanetaSkalista() :Planeta()
 {
 	Nazwa[2] = { 'S' };
 	Nazwa[3] = { '\0' };
-	Promien = ((double)rand() + 2E6 / (double)RAND_MAX * (1E7 - 2E6));
-	Masa = 3000.0 + ((double)rand() / (double)RAND_MAX * (7000.0 - 3000.0)) * 4/3 *3.14* Promien * Promien * Promien;
+	Promien = 2E5 + ((long double)rand() / (long double)RAND_MAX * (1E7 - 2E5));
+	
+	Masa = 3000.0 + ((long double)rand() / (long double)RAND_MAX * (7000.0 - 3000.0)) * 4/3 *3.14* Promien * Promien * Promien;
 	
 	if (rand() % 2) Woda = true;
 	SredniaTemp = 100;

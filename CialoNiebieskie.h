@@ -5,37 +5,38 @@
 class CialoNiebieskie
 {
 protected:
-	double Masa;
-	double Promien;
+	long double Masa;
+	long double Promien;
 	char Nazwa[32];
+	long double PozycjaX;
+	long double PozycjaY;
 private:
-	double PozycjaX;
-	double PozycjaY;
-	double PredkoscX;
-	double PredkoscY;
-	double PrzyspieszenieX;
-	double PrzyspieszenieY;
+	
+	long double PredkoscX;
+	long double PredkoscY;
+	long double PrzyspieszenieX;
+	long double PrzyspieszenieY;
 
 	
 public:
 	CialoNiebieskie();
-	CialoNiebieskie(double masa, double promien);
-	CialoNiebieskie(double masa, double promien, double pozycjax, double pozycjay);
+	CialoNiebieskie(long double masa, long double promien);
+	CialoNiebieskie(long double masa, long double promien, long double pozycjax, long double pozycjay);
 
-	double getPozycjaX();
-	double getPozycjaY();
-	double getMasa();
-	double getPromien();
-	double getPredkoscX();
-	double getPredkoscY();
-	double getPrzyspieszenieX();
-	double getPrzyspieszenieY();
+	long double getPozycjaX();
+	long double getPozycjaY();
+	long double getMasa();
+	long double getPromien();
+	long double getPredkoscX();
+	long double getPredkoscY();
+	long double getPrzyspieszenieX();
+	long double getPrzyspieszenieY();
 	char* getNazwa();
-	void setPozycjaX(double x);
-	void setPozycjaY(double y);
-	void setPrzyspieszenieX(double x);
-	void setPrzyspieszenieY(double y);
-	void setPredkoscX(double x);
-	void setPredkoscY(double y);
+	void setPozycjaX(long double x);
+	void setPozycjaY(long double y);
+	void setPrzyspieszenieX(long double x);
+	void setPrzyspieszenieY(long double y);
+	void setPredkoscX(long double x);
+	void setPredkoscY(long double y);
 	
 };

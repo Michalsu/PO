@@ -13,25 +13,28 @@ std::vector <Planetoida*> listaPlanetoid;
 
 void PoliczPrzyspieszenie(CialoNiebieskie* Pi, CialoNiebieskie* Pj)
 {
-	double przyspieszenieGrawX=0, przyspieszenieOdsrodX=0, przyspieszenieGrawY=0, przyspieszenieOdsrodY=0;
-	double odlegloscX = Pj->getPozycjaX() - Pi->getPozycjaX();
-	if (odlegloscX < -100 || odlegloscX > 100) {
-		przyspieszenieGrawX = (_STALA_GRAWITACJI * Pj->getMasa() / (odlegloscX * odlegloscX));
+	long double przyspieszenieGrawX=0, przyspieszenieOdsrodX=0, przyspieszenieGrawY=0, przyspieszenieOdsrodY=0;
+	long double odlegloscX = Pj->getPozycjaX() - Pi->getPozycjaX();
+	long double odlegloscY = Pj->getPozycjaY() - Pi->getPozycjaY();
+	long double odleglosc = odlegloscX * odlegloscX + odlegloscY * odlegloscY;
+	if (odlegloscX < -1E3 || odlegloscX > 1E3) {
+		przyspieszenieGrawX = (_STALA_GRAWITACJI * Pj->getMasa() *odlegloscX/ (odleglosc * odleglosc));
 		przyspieszenieOdsrodX = (Pi->getPredkoscX() * Pi->getPredkoscX()) / odlegloscX;
 	}
 
-	double odlegloscY = Pj->getPozycjaY() - Pi->getPozycjaY();
-	if (odlegloscY < -100 || odlegloscY > 100) {
-		przyspieszenieGrawY = (_STALA_GRAWITACJI * Pj->getMasa() / (odlegloscY * odlegloscY));
+	
+	if (odlegloscY < -1E3 || odlegloscY > 1E3) {
+		przyspieszenieGrawY = (_STALA_GRAWITACJI * Pj->getMasa() * odlegloscY / (odleglosc * odleglosc));
 		przyspieszenieOdsrodY = (Pi->getPredkoscY() * Pi->getPredkoscY()) / odlegloscY;
 	}
 	
-	double przyspieszenieX = przyspieszenieGrawX + przyspieszenieOdsrodX;
-	double przyspieszenieY = przyspieszenieGrawY + przyspieszenieOdsrodY;
-
+	long double przyspieszenieX = przyspieszenieGrawX +0* przyspieszenieOdsrodX;
+	long double przyspieszenieY = przyspieszenieGrawY +0* przyspieszenieOdsrodY;
 	Pi->setPrzyspieszenieX(Pi->getPrzyspieszenieX() + przyspieszenieX);
 	Pi->setPrzyspieszenieY(Pi->getPrzyspieszenieY() + przyspieszenieY);
+	
 }
+
 
 //void UkladPlanetarny::InicjalizujListeCial(std::vector <std::vector<CialoNiebieskie*> > *pCiala)
 //{
@@ -74,7 +77,7 @@ void UkladPlanetarny::UsunZListy(int lp)
 }
 
 void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*> &listaCial) {
-	double przyspieszenieX = 0, przyspieszenieY = 0;
+	long double przyspieszenieX = 0, przyspieszenieY = 0;
 
 	for (int i = 0; i < listaCial.size(); i++) {
 		listaCial[i]->setPrzyspieszenieX(0);
@@ -84,6 +87,7 @@ void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*> &li
 				PoliczPrzyspieszenie(listaCial.at(i), listaCial.at(j));
 			}
 		}
+		
 		
 	}
 
@@ -117,14 +121,12 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 	 listaGwiazdZyjacych.push_back(new GwiazdaZyjaca());
 	 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaGwiazdZyjacych.at(0)));
 	 for (int i = 0; i < IloscPlanetSkalistych; i++) {
-		 
-		 
 		 listaPlanetSkalistych.push_back(new PlanetaSkalista());
 		 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaPlanetSkalistych.at(i)));
 	 }
 	 for (int i = 0; i < IloscPlanetGazowych; i++) {
 		 listaPlanetGazowych.push_back(new PlanetaGazowa());
-		 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaPlanetSkalistych.at(i)));
+		 ciala->push_back(dynamic_cast<CialoNiebieskie*>(listaPlanetGazowych.at(i)));
 	 }
 	 for (int i = 0; i < IloscPlanetoid; i++) {
 		 listaPlanetoid.push_back(new Planetoida());
