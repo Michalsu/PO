@@ -4,7 +4,7 @@ PlanetaSkalista::PlanetaSkalista() :Planeta()
 {
 	Nazwa[2] = { 'S' };
 	Nazwa[3] = { '\0' };
-	Promien = 2E5 + ((long double)rand() / (long double)RAND_MAX * (1E7 - 2E5));
+	Promien = 2E5 + ((long double)rand() / (long double)RAND_MAX * (8E7 - 2E5));
 	
 	Masa = 3000.0 + ((long double)rand() / (long double)RAND_MAX * (7000.0 - 3000.0)) * 4/3 *3.14* Promien * Promien * Promien;
 	

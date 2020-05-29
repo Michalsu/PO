@@ -4,7 +4,7 @@
 class Gwiazda :
 	public CialoNiebieskie
 {
-private:
+protected:
 	int Temperatura;
 	
 public:
