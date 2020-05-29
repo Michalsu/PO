@@ -217,6 +217,13 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 				 }
 			 }
 		 }
+		 if (listaCial.at(i)->getPozycjaX() > 1E13 || listaCial.at(i)->getPozycjaX() < -1E13 || listaCial.at(i)->getPozycjaY() > 1E13 || listaCial.at(i)->getPozycjaY() < -1E13) {
+			 listaCial.erase(listaCial.begin() + i);
+			 UsunZListy(i);
+			 std::cout << "cialo " << listaCial.at(i)->getNazwa() << " opuscilo ten uklad gwiezdny" << std::endl;
+			 nObiektow -= 1;
+			 if (i > 0) i--;
+		 }
 
 	 }
 	 
