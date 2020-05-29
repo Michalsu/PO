@@ -4,8 +4,8 @@ CialoNiebieskie::CialoNiebieskie() {
 	Nazwa[0] = {'C'};
 	Masa = ((long double)rand() + 1E5 / (long double)RAND_MAX *(1E8- 1E5));
 	Promien = 10000;
-	PozycjaX = -1E10 + ((long double)rand() / (long double)RAND_MAX * (1E10 - -1E10));
-	PozycjaY = -1E10 + ((long double)rand() / (long double)RAND_MAX * (1E10 - -1E10));
+	PozycjaX = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
+	PozycjaY = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
 	PredkoscX = 0;
 	PredkoscY = 0;
 	PrzyspieszenieX = 0;

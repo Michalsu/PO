@@ -18,7 +18,7 @@ int main()
 srand((unsigned)time(NULL));
  std::cout << "Solar systems" << std::endl;
 
- double TempoSymulacji = 0.00000001;
+ double TempoSymulacji = 1.0;
 unsigned int nObiektow, nGwiazdZyjacych=1, nPlanetSkalistych=40, nPlanetGazowych=0, nPlanetoid=0;
  nObiektow = nGwiazdZyjacych + nPlanetSkalistych + nPlanetGazowych + nPlanetoid;
 
@@ -67,19 +67,20 @@ unsigned int nObiektow, nGwiazdZyjacych=1, nPlanetSkalistych=40, nPlanetGazowych
  uklad.WypiszObiekty();
  
  unsigned int height = 800, width = 1200;
- long double maxH =2E10, maxW = 2E10;
+ long double maxH =2E12, maxW = 2E12;
+ int mnoznikwielkosci = 100;
          sf::RenderWindow window(sf::VideoMode(width, height), "Solaris!");
-         float promien = listaCialNiebieskich.at(0)->getPromien() / maxH * height;
+         float promien = listaCialNiebieskich.at(0)->getPromien() / maxH * height * mnoznikwielkosci;
          sf::CircleShape shapeSun(promien);
-         sf::CircleShape shapePlanet0(listaCialNiebieskich.at(1)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet1(listaCialNiebieskich.at(2)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet2(listaCialNiebieskich.at(3)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet3(listaCialNiebieskich.at(4)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet4(listaCialNiebieskich.at(5)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet5(listaCialNiebieskich.at(6)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet6(listaCialNiebieskich.at(7)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet7(listaCialNiebieskich.at(8)->getPromien() / maxH * height);
-         sf::CircleShape shapePlanet8(listaCialNiebieskich.at(9)->getPromien() / maxH * height);
+         sf::CircleShape shapePlanet0(listaCialNiebieskich.at(1)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet1(listaCialNiebieskich.at(2)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet2(listaCialNiebieskich.at(3)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet3(listaCialNiebieskich.at(4)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet4(listaCialNiebieskich.at(5)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet5(listaCialNiebieskich.at(6)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet6(listaCialNiebieskich.at(7)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet7(listaCialNiebieskich.at(8)->getPromien() / maxH * height * mnoznikwielkosci);
+         sf::CircleShape shapePlanet8(listaCialNiebieskich.at(9)->getPromien() / maxH * height * mnoznikwielkosci);
          
          
         
@@ -107,7 +108,7 @@ unsigned int nObiektow, nGwiazdZyjacych=1, nPlanetSkalistych=40, nPlanetGazowych
 
 
              uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
-             uklad.AktualizujPredkosc(listaCialNiebieskich);
+             uklad.AktualizujPredkosc(listaCialNiebieskich, TempoSymulacji);
              uklad.AktualizujPozycje(listaCialNiebieskich, TempoSymulacji);
              uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow);
              
@@ -117,31 +118,31 @@ unsigned int nObiektow, nGwiazdZyjacych=1, nPlanetSkalistych=40, nPlanetGazowych
              }
              if (listaCialNiebieskich.size() > 1) {
                  shapePlanet0.setPosition(-listaCialNiebieskich.at(1)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(1)->getPozycjaX() / maxH * height + height / 2);
-                 shapePlanet0.setRadius(listaCialNiebieskich.at(1)->getPromien() / maxH * height);
+                 shapePlanet0.setRadius(listaCialNiebieskich.at(1)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 2) { shapePlanet1.setPosition(-listaCialNiebieskich.at(2)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(2)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet1.setRadius(listaCialNiebieskich.at(2)->getPromien() / maxH * height);
+             shapePlanet1.setRadius(listaCialNiebieskich.at(2)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 3) { shapePlanet2.setPosition(-listaCialNiebieskich.at(3)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(3)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet2.setRadius(listaCialNiebieskich.at(3)->getPromien() / maxH * height);
+             shapePlanet2.setRadius(listaCialNiebieskich.at(3)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 4) {shapePlanet3.setPosition(-listaCialNiebieskich.at(4)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(4)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet3.setRadius(listaCialNiebieskich.at(4)->getPromien() / maxH * height);
+             shapePlanet3.setRadius(listaCialNiebieskich.at(4)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 5) {shapePlanet4.setPosition(-listaCialNiebieskich.at(5)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(5)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet4.setRadius(listaCialNiebieskich.at(5)->getPromien() / maxH * height);
+             shapePlanet4.setRadius(listaCialNiebieskich.at(5)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 6) {shapePlanet5.setPosition(-listaCialNiebieskich.at(6)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(6)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet5.setRadius(listaCialNiebieskich.at(6)->getPromien() / maxH * height);
+             shapePlanet5.setRadius(listaCialNiebieskich.at(6)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 7) {shapePlanet6.setPosition(-listaCialNiebieskich.at(7)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(7)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet6.setRadius(listaCialNiebieskich.at(7)->getPromien() / maxH * height);
+             shapePlanet6.setRadius(listaCialNiebieskich.at(7)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 8){ shapePlanet7.setPosition(-listaCialNiebieskich.at(8)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(8)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet7.setRadius(listaCialNiebieskich.at(8)->getPromien() / maxH * height);
+             shapePlanet7.setRadius(listaCialNiebieskich.at(8)->getPromien() / maxH * height * mnoznikwielkosci);
              }
              if (listaCialNiebieskich.size() > 9) { shapePlanet8.setPosition(-listaCialNiebieskich.at(9)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(9)->getPozycjaX() / maxH * height + height / 2);
-             shapePlanet8.setRadius(listaCialNiebieskich.at(9)->getPromien() / maxH * height);
+             shapePlanet8.setRadius(listaCialNiebieskich.at(9)->getPromien() / maxH * height * mnoznikwielkosci);
              }
 
              sf::Event event;

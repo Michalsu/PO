@@ -1,6 +1,7 @@
 #include "UkladPlanetarny.h"
 
 #define _STALA_GRAWITACJI 6,6743015E-11
+#define _PREDKOSC_SWIATLA 299792458
 
 std::vector <GwiazdaZyjaca*> listaGwiazdZyjacych;
 std::vector <GwiazdaZdegradowana*> listaGwiazdZdegradowanych;
@@ -13,23 +14,21 @@ std::vector <Planetoida*> listaPlanetoid;
 
 void PoliczPrzyspieszenie(CialoNiebieskie* Pi, CialoNiebieskie* Pj)
 {
-	long double przyspieszenieGrawX=0, przyspieszenieOdsrodX=0, przyspieszenieGrawY=0, przyspieszenieOdsrodY=0;
+	long double przyspieszenieGrawX=0, przyspieszenieGrawY=0;
 	long double odlegloscX = Pj->getPozycjaX() - Pi->getPozycjaX();
 	long double odlegloscY = Pj->getPozycjaY() - Pi->getPozycjaY();
 	long double odleglosc = sqrt(odlegloscX * odlegloscX + odlegloscY * odlegloscY);
 	if (odlegloscX < -1E3 || odlegloscX > 1E3) {
 		przyspieszenieGrawX = (_STALA_GRAWITACJI * Pj->getMasa() *odlegloscX/ (odleglosc * odleglosc* odleglosc));
-		przyspieszenieOdsrodX = (Pi->getPredkoscX() * Pi->getPredkoscX()) / odlegloscX;
 	}
 
 	
 	if (odlegloscY < -1E3 || odlegloscY > 1E3) {
 		przyspieszenieGrawY = (_STALA_GRAWITACJI * Pj->getMasa() * odlegloscY / (odleglosc * odleglosc * odleglosc));
-		przyspieszenieOdsrodY = (Pi->getPredkoscY() * Pi->getPredkoscY()) / odlegloscY;
 	}
 	
-	long double przyspieszenieX = przyspieszenieGrawX +0* przyspieszenieOdsrodX;
-	long double przyspieszenieY = przyspieszenieGrawY +0* przyspieszenieOdsrodY;
+	long double przyspieszenieX = przyspieszenieGrawX;
+	long double przyspieszenieY = przyspieszenieGrawY;
 	Pi->setPrzyspieszenieX(Pi->getPrzyspieszenieX() + przyspieszenieX);
 	Pi->setPrzyspieszenieY(Pi->getPrzyspieszenieY() + przyspieszenieY);
 	
@@ -80,7 +79,7 @@ void UkladPlanetarny::PoliczPredkoscOrbitalna(std::vector<CialoNiebieskie*>& lis
 {
 	long double SrodekUkladuX=0, SrodekUkladuY=0; //srodek ciezkosci gwiazd
 	long double MasaSrodkaUkladu=1; //masa gwiazd
-	long double PredkoscOrbitalnaX, PredkoscOrbitalnaY;
+	long double PredkoscOrbitalna, PredkoscOrbitalnaX, PredkoscOrbitalnaY;
 	long double odlegloscX, odlegloscY, odleglosc;
 	//dla 1 gwiazdy
 	if (IleGwiazd == 1) {
@@ -99,9 +98,9 @@ void UkladPlanetarny::PoliczPredkoscOrbitalna(std::vector<CialoNiebieskie*>& lis
 	odlegloscX = pCialo->getPozycjaX() - SrodekUkladuX;
 	odlegloscY = pCialo->getPozycjaY() - SrodekUkladuY;
 	odleglosc = sqrt(odlegloscX* odlegloscX+ odlegloscY * odlegloscY);
-	long double testparametru = pow((MasaSrodkaUkladu / pCialo->getMasa()),3/2);
-	PredkoscOrbitalnaX = -200 * sqrt((testparametru*_STALA_GRAWITACJI * MasaSrodkaUkladu / odleglosc))*odlegloscY/odleglosc;
-	PredkoscOrbitalnaY = 200 * sqrt((testparametru*_STALA_GRAWITACJI * MasaSrodkaUkladu / odleglosc)) * odlegloscX / odleglosc;
+	PredkoscOrbitalna = sqrt(( _STALA_GRAWITACJI * MasaSrodkaUkladu / odleglosc));
+	PredkoscOrbitalnaX = -PredkoscOrbitalna * odlegloscY / odleglosc;
+	PredkoscOrbitalnaY =  PredkoscOrbitalna * odlegloscX / odleglosc;
 
 	pCialo->setPredkoscX(PredkoscOrbitalnaX);
 	pCialo->setPredkoscY(PredkoscOrbitalnaY);
@@ -125,10 +124,10 @@ void UkladPlanetarny::AktualizujPrzyspieszenie(std::vector<CialoNiebieskie*> &li
 	
 }
 
-void UkladPlanetarny::AktualizujPredkosc(std::vector<CialoNiebieskie*>& listaCial) {
+void UkladPlanetarny::AktualizujPredkosc(std::vector<CialoNiebieskie*>& listaCial, double Tempo) {
 	for (int i = 0; i < listaCial.size(); i++) {
-		listaCial.at(i)->setPredkoscX(listaCial.at(i)->getPredkoscX() + listaCial.at(i)->getPrzyspieszenieX());
-		listaCial.at(i)->setPredkoscY(listaCial.at(i)->getPredkoscY() + listaCial.at(i)->getPrzyspieszenieY());
+		listaCial.at(i)->setPredkoscX(listaCial.at(i)->getPredkoscX() + listaCial.at(i)->getPrzyspieszenieX() * Tempo);
+		listaCial.at(i)->setPredkoscY(listaCial.at(i)->getPredkoscY() + listaCial.at(i)->getPrzyspieszenieY() * Tempo);
 	}
 }
 
