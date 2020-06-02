@@ -90,7 +90,7 @@ void symulacjastart()
     std::ofstream wynik;
     zapis.open("zapisprzebiegusymulacji.txt");
     wynik.open("zapisdobrychplanet.txt");
-    for (int i = 0; i < czas; i++)
+    while (czas< uklad.LiczLata(TempoSymulacji))
     {
         uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
         uklad.AktualizujPredkosc(listaCialNiebieskich, TempoSymulacji);

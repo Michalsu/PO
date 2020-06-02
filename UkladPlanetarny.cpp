@@ -9,6 +9,7 @@ std::vector <PlanetaSkalista*> listaPlanetSkalistych;
 std::vector <PlanetaGazowa*> listaPlanetGazowych;
 std::vector <Planetoida*> listaPlanetoid;
 std::vector <CialoNiebieskie*> listaCialNiebieskich;
+float tempCzas = 0;
 
 #include <fstream>
 
@@ -225,6 +226,21 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 	
 	 
  }
+
+ int UkladPlanetarny::LiczLata(double Tempo)
+ {
+	 //Przeliczanie czasu który up³yn¹³ niezale¿nie od tempa
+	czas += int(Tempo);
+	tempCzas += (Tempo - int(Tempo));
+	if (tempCzas >= 1.0) {
+		czas += int(tempCzas);
+		tempCzas -= int(tempCzas);
+	}
+
+	return czas / 525600;
+ }
+
+
 
 
 
