@@ -5,14 +5,15 @@ class PlanetaSkalista :
 {
 private:
 
-	bool Woda;
+	bool Woda = false;
 	int SredniaTemp;
 	double WspolczynnikKolonizacji;
 public:
 	PlanetaSkalista();
-	double LiczWspolczynnikKolonizacji();
+	void LiczWspolczynnikKolonizacji();
 	int getSredniaTemp();
 	bool getWoda();
 	double getWspolczynnikKolonizacji();
+	void wypiszdane(std::ofstream& wynik);
 };
 

@@ -18,106 +18,10 @@
 
 int main();
 
-//void wyswietlwynik()
-//{
-//    std::cout << "tu beda wyniki";
-//    system("cls");
-//    main();
-//}
-//
-//void wyswietlzapis()
-//{
-//    std::cout << "tu bedzie zapis symulacji";
-//    system("cls");
-//    main();
-//}
+void symulacjastart();
 
-//void symulacjastart();
-//
-//void jeszczeraz()
-//{
-//    std::cout << "Czy chcesz zasymulowaæ kolejny uk³ad?" << std::endl <<
-//        "Kliknij 1 jesli tak i 2 jesli chcesz wrocic do menu glownego";
-//
-//    int klawisz;
-//    klawisz = kbhit();
-//
-//    if (klawisz == 1)
-//    {
-//        symulacjastart();
-//    }
-//    if (klawisz == 2) 
-//    {
-//        system("cls");
-//        main();
-//    }
-//        
-//}
-
-void symulacjastart()
+void menu()
 {
-    std::vector <CialoNiebieskie*> listaCialNiebieskich;
-    unsigned int nPlanetSkalistych;
-    unsigned int nPlanetGazowych;
-    unsigned int nPlanetoid = 10;
-    unsigned int nGwiazdZyjacych = 1;
-    int liczbakolizji=0;
-
-    double TempoSymulacji = 1.0;
-    unsigned int nObiektow;
-
-    unsigned long long int czas;
-
-    system("cls");
-    /*std::cout << "Podaj nazwe ukladu";
-    std::cin >> NazwaUkladu;*/
-
-    std::cout << std::endl << "Podaj liczbe symulowanych lat"; // tu trzeba bêdzie dobraæ odpowiedni¹ prêdkoœæ symulacji
-    std::cin >> czas;
-
-    std::cout << std::endl << "Podaj poczatkowa liczbe planet skalistych w ukladzie:";
-    std::cin >> nPlanetSkalistych;
-
-    std::cout << std::endl << "Podaj poczatkowa liczbe planet gazowych w ukladzie:";
-    std::cin >> nPlanetGazowych;
-
-    nObiektow = nGwiazdZyjacych + nPlanetSkalistych + nPlanetGazowych + nPlanetoid;
-
-    UkladPlanetarny uklad;
-
-    uklad.StworzUklad(&listaCialNiebieskich, nGwiazdZyjacych, nPlanetSkalistych, nPlanetGazowych, nPlanetoid);
-    std::ofstream zapis;
-    std::ofstream wynik;
-    zapis.open("zapisprzebiegusymulacji.txt");
-    wynik.open("zapisdobrychplanet.txt");
-    while (czas< uklad.LiczLata(TempoSymulacji))
-    {
-        uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
-        uklad.AktualizujPredkosc(listaCialNiebieskich, TempoSymulacji);
-        uklad.AktualizujPozycje(listaCialNiebieskich, TempoSymulacji);
-        uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow, zapis, liczbakolizji);
-
-        if (!(czas % 100)) {
-            for (int i = 0; i < nObiektow; i++)
-            {
-                zapis << "R" << i + 1 << " R " << listaCialNiebieskich[i]->getPromien() << std::endl
-                    << " M " << listaCialNiebieskich[i]->getMasa() << std::endl <<
-                    " pX " << listaCialNiebieskich[i]->getPozycjaX() << std::endl <<
-                    " pY " << listaCialNiebieskich[i]->getPozycjaY() << std::endl <<
-                    " vX " << listaCialNiebieskich[i]->getPredkoscX() << std::endl <<
-                    " vY " << listaCialNiebieskich[i]->getPredkoscY() << std::endl <<
-                    " aX " << listaCialNiebieskich[i]->getPrzyspieszenieX() << std::endl <<
-                    " aY" << listaCialNiebieskich[i]->getPrzyspieszenieY() << std::endl;
-            }
-        }
-    }
-    zapis.close();
-    system("cls");
-    std::cout << "Koncowy stan ukladu:" << std::endl;
-    uklad.WypiszObiekty();
-    uklad.wypiszplanety(wynik);
-    wynik.close();
-
     std::cout << std::endl << "Kliknij 1 jesli chcesz przeprowadzic kolejna symulacje" << std::endl <<
         "Kliknij 2 jesli chcesz zobaczyc planety zdatne do zamieszkania" << std::endl <<
         "Kliknij 3 jesli chcesz zobaczyc zapis przebiegu symulacji" << std::endl <<
@@ -126,29 +30,123 @@ void symulacjastart()
     int wybor;
     wybor = getch();
 
+
     switch (wybor)
     {
     case '1':
         system("cls");
         symulacjastart();
-        //jeszczeraz();
         break;
 
     case '2':
         system("cls");
-        std::cout << std::ifstream("zapisdobrychplanet.txt").rdbuf();
+        std::cout << std::ifstream("zapisdobrychplanet.txt").rdbuf(); 
+        std::cout << std::endl << "kliknij zeby wrocic do menu";
+        getch();
+        main();
         break;
 
     case '3':
         system("cls");
         std::cout << std::ifstream("zapisprzebiegusymulacji.txt").rdbuf();
+        std::cout << std::endl << "kliknij zeby wrocic do menu";
+        getch();
+        main();
         break;
 
     case '4':
         main();
     }
+}
 
+void symulacjastart()
+{
+    bool gwiazda = true;
+    std::vector <CialoNiebieskie*> listaCialNiebieskich;
+    unsigned int nPlanetSkalistych;
+    unsigned int nPlanetGazowych;
+    unsigned int nPlanetoid = 0;
+    unsigned int nGwiazdZyjacych = 1;
+    unsigned int nGwiazdZdegradowanych = 0;
+    int liczbakolizji=0;
+    int kontrola = 0;
+    //std::vector <GwiazdaZdegradowana*> listaGwiazdZdegradowanych;
 
+    double TempoSymulacji = 2.770;
+    unsigned int nObiektow;
+
+    unsigned int czas;
+
+    system("cls");
+    
+    std::cout << "Podaj liczbe symulowanych lat: "; // tu trzeba bêdzie dobraæ odpowiedni¹ prêdkoœæ symulacji
+    std::cin >> czas;
+
+    std::cout << std::endl << "Podaj poczatkowa liczbe planet skalistych w ukladzie: ";
+    std::cin >> nPlanetSkalistych;
+
+    std::cout << std::endl << "Podaj poczatkowa liczbe planet gazowych w ukladzie: ";
+    std::cin >> nPlanetGazowych;
+
+    std::cout << std::endl << "Podaj liczbe planetoid w ukladzie (zalecane 300): ";
+    std::cin >> nPlanetoid;
+
+    nObiektow = nGwiazdZyjacych + nPlanetSkalistych + nPlanetGazowych + nPlanetoid + nGwiazdZdegradowanych;
+
+    UkladPlanetarny uklad;
+
+    std::cout << std::endl << "Podaj nazwe ukladu: ";
+
+    uklad.nazwij();
+
+    system("cls");
+    std::cout << "Tworzymy uklad i przeprowadzamy symulacje..." << std::endl << "Czekaj na wyniki... Ponizej wyswietlamy wazniejsze wydarzenia"
+        << std::endl;
+
+    uklad.StworzUklad(&listaCialNiebieskich, nGwiazdZyjacych, nPlanetSkalistych, nPlanetGazowych, nPlanetoid);
+    std::ofstream zapis;
+    std::ofstream wynik;
+    zapis.open("zapisprzebiegusymulacji.txt");
+    wynik.open("zapisdobrychplanet.txt");
+   /* for (int i = 0; i < czas; i++)
+    {*/
+    int cykl = 0;
+        while (czas > uklad.LiczLata(TempoSymulacji))
+        {
+            uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
+            uklad.AktualizujPredkosc(listaCialNiebieskich, TempoSymulacji);
+            uklad.AktualizujPozycje(listaCialNiebieskich, TempoSymulacji);
+            uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow, zapis, liczbakolizji);
+            uklad.ewolucja(listaCialNiebieskich, czas, kontrola, gwiazda);
+            
+            if (!(cykl % 100)) {
+               
+                for (int i = 0; i < nObiektow; i++)
+                {
+                    
+                    zapis << "R" << i + 1 << " R " << listaCialNiebieskich[i]->getPromien() << std::endl
+                        << " M " << listaCialNiebieskich[i]->getMasa() << std::endl <<
+                        " pX " << listaCialNiebieskich[i]->getPozycjaX() << std::endl <<
+                        " pY " << listaCialNiebieskich[i]->getPozycjaY() << std::endl <<
+                        " vX " << listaCialNiebieskich[i]->getPredkoscX() << std::endl <<
+                        " vY " << listaCialNiebieskich[i]->getPredkoscY() << std::endl <<
+                        " aX " << listaCialNiebieskich[i]->getPrzyspieszenieX() << std::endl <<
+                        " aY" << listaCialNiebieskich[i]->getPrzyspieszenieY() << std::endl;
+                }
+            }
+        //}
+            cykl++;
+
+        }
+    zapis.close();
+    system("cls");
+    std::cout << "Koncowy stan:" << std::endl;
+    uklad.WypiszObiekty();
+    std::cout << "Liczba kolizji obiektow:" << liczbakolizji;
+    uklad.wypiszplanety(wynik, gwiazda);
+    wynik.close();
+    uklad.posprzataj();
+    menu();
 
 }
 
@@ -159,6 +157,8 @@ int main()
 {
     char a;
     srand((unsigned)time(NULL));
+
+    system("cls");
 
     std::cout << "Witaj w SOLARIS! Wybierz jedna z opcji" << std::endl << std::endl;
 

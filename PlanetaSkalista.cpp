@@ -1,27 +1,54 @@
 #include "PlanetaSkalista.h"
+#include <time.h>
+
 
 PlanetaSkalista::PlanetaSkalista() :Planeta()
 {
-	Nazwa[2] = { 'S' };
-	Nazwa[3] = { '\0' };
+	Nazwa[0] = { 'P' };
+	Nazwa[1] = { 'S' };
+	Nazwa[2] = { 'a' + rand() % 26 };
+	Nazwa[3] = { 'a' + rand() % 26 };
+	Nazwa[4] = { 'a' + rand() % 26 };
+	Nazwa[5] = { '-'};
+	Nazwa[6] = { 'a' + rand() % 26 };
+	Nazwa[7] = { 'a' + rand() % 26 };
+	Nazwa[8] = { '\0' };
+
 	Promien = 2E5 + ((long double)rand() / (long double)RAND_MAX * (8E7 - 2E5));
-	
 	Masa = 3000.0 + ((long double)rand() / (long double)RAND_MAX * (7000.0 - 3000.0)) * 4/3 *3.14* Promien * Promien * Promien;
+
+	WspolczynnikKolonizacji = 0;
+	SredniaTemp = rand() % 100;
+	int losowe = rand() % 100;
+	if (losowe > 30 && losowe < 70) 
+	{
+		Woda = true;
+	}
+	if (Woda) 
+	{
+		WspolczynnikKolonizacji += 1000;
+	}
+	if (SredniaTemp >= 0 && SredniaTemp <= 100)
+	{
+		WspolczynnikKolonizacji += SredniaTemp;
+	}
 	
-	if (rand() % 2) Woda = true;
-	SredniaTemp = 100;
-	WspolczynnikKolonizacji = 300;
-		if (Woda) WspolczynnikKolonizacji += 1500;
+}
+
+
+void PlanetaSkalista::LiczWspolczynnikKolonizacji()
+{
+	
 
 }
 
 
-double PlanetaSkalista::LiczWspolczynnikKolonizacji()
+void PlanetaSkalista::wypiszdane(std::ofstream& wynik)
 {
-	int temp=300;
-	if (Woda) temp += 1500;
-	if (SredniaTemp >= 240 && SredniaTemp <= 320) temp += 1000;
-	return temp;
+	wynik << "Nazwa Planety:" << Nazwa << std::endl << "Masa planety:" << Masa << std::endl <<
+		"Promien planety:" << Promien << std::endl << "Srednia temperatura planety:" << SredniaTemp << std::endl <<
+		"Wspolczynnik kolonizacji:" << WspolczynnikKolonizacji << std::endl <<std::endl;
+		
 }
 
 int PlanetaSkalista::getSredniaTemp()
