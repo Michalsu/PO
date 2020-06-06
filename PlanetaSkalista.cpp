@@ -4,6 +4,9 @@
 
 PlanetaSkalista::PlanetaSkalista() :Planeta()
 {
+	PozycjaX = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
+	PozycjaY = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
+
 	Nazwa[0] = { 'P' };
 	Nazwa[1] = { 'S' };
 	Nazwa[2] = { 'a' + rand() % 26 };
@@ -33,13 +36,6 @@ PlanetaSkalista::PlanetaSkalista() :Planeta()
 		WspolczynnikKolonizacji += SredniaTemp;
 	}
 	
-}
-
-
-void PlanetaSkalista::LiczWspolczynnikKolonizacji()
-{
-	
-
 }
 
 

@@ -25,54 +25,6 @@ void UkladPlanetarny::posprzataj()
 
 }
 
-//UkladPlanetarny::UkladPlanetarny()
-//{
-//	std::cout << "Podaj nazwe ukladu";
-//	std::cin >> NazwaUkladu;
-//
-//	std::cout << std::endl << "Podaj liczbe symulowanych lat"; // tu trzeba bêdzie dobraæ odpowiedni¹ prêdkoœæ symulacji
-//	std::cin >> czas;
-//
-//	std::cout << std::endl << "Podaj poczatkowa liczbe planet skalistych w ukladzie:";
-//	std::cin >> nPlanetSkalistych;
-//
-//	std::cout << std::endl << "Podaj poczatkowa liczbe planet gazowych w ukladzie:";
-//	std::cin >> nPlanetGazowych; 
-//
-//	nObiektow = nGwiazdZyjacych + nPlanetSkalistych + nPlanetGazowych + nPlanetoid;
-//
-//	UkladPlanetarny uklad;
-//
-//	uklad.StworzUklad(&listaCialNiebieskich, nGwiazdZyjacych, nPlanetSkalistych, nPlanetGazowych, nPlanetoid);
-//	std::ofstream zapis;
-//	zapis.open("zapisprzebiegusymulacji.txt");
-//	for (int i = 0; i < czas; i++)
-//	{
-//		uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
-//		uklad.AktualizujPredkosc(listaCialNiebieskich, TempoSymulacji);
-//		uklad.AktualizujPozycje(listaCialNiebieskich, TempoSymulacji);
-//		uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow);
-//
-//
-//		for (int i = 0; i < nObiektow; i++)
-//		{
-//			zapis << "O" << i + 1 << " promien " << listaCialNiebieskich[i]->getPromien() << std::endl
-//				<< " masa " << listaCialNiebieskich[i]->getMasa() << std::endl <<
-//				" pozycjaX " << listaCialNiebieskich[i]->getPozycjaX() << std::endl <<
-//				" pozycjaY " << listaCialNiebieskich[i]->getPozycjaY() << std::endl <<
-//				" predkoscX " << listaCialNiebieskich[i]->getPredkoscX() << std::endl <<
-//				" PredkoscY " << listaCialNiebieskich[i]->getPredkoscY() << std::endl <<
-//				"PrzyspieszenieX " << listaCialNiebieskich[i]->getPrzyspieszenieX() << std::endl <<
-//				"PrzyspieszenieY" << listaCialNiebieskich[i]->getPrzyspieszenieY() << std::endl;
-//		}
-//	}
-//	zapis.close();
-//	system("cls");
-//	std::cout << "Wyniki symulacji:" << std::endl;
-//	uklad.WypiszObiekty();
-//	std::cout << std::endl << "Przebieg symulacji znajdziesz w pliku txt";
-//
-//}
 
 void UkladPlanetarny::nazwij()
 {
@@ -86,10 +38,8 @@ void UkladPlanetarny::wypiszplanety(std::ofstream& wynik, bool gwiazda)
 	{
 		for (int i = 0; i < listaPlanetSkalistych.size(); i++)
 		{
-			listaPlanetSkalistych.at(i)->LiczWspolczynnikKolonizacji();
 			if ((listaPlanetSkalistych.at(i)->getWspolczynnikKolonizacji()) >= 500)
 			{
-				//wynik << "Oto dane planet zdatnych do kolonizacji przez czlowieka:" <<
 				listaPlanetSkalistych.at(i)->wypiszdane(wynik);
 				liczbaplanet++;
 			}
@@ -166,14 +116,7 @@ void UkladPlanetarny::PoliczPredkoscOrbitalna(std::vector<CialoNiebieskie*>& lis
 		SrodekUkladuY = listaCial.at(0)->getPozycjaY();
 		MasaSrodkaUkladu = listaCial.at(0)->getMasa();
 	}
-	// dla kilku gwiazd 
-	else {
 
-		/*
-
-
-		*/
-	}
 	odlegloscX = pCialo->getPozycjaX() - SrodekUkladuX;
 	odlegloscY = pCialo->getPozycjaY() - SrodekUkladuY;
 	odleglosc = sqrt(odlegloscX * odlegloscX + odlegloscY * odlegloscY);
@@ -216,14 +159,6 @@ void UkladPlanetarny::AktualizujPozycje(std::vector<CialoNiebieskie*>& listaCial
 		listaCial.at(i)->setPozycjaY(listaCial.at(i)->getPozycjaY() + listaCial.at(i)->getPredkoscY() * Tempo);
 	}
 }
-////dzia³ajaca prymitywna wersja
-// void UkladPlanetarny::StworzUklad(std::vector<CialoNiebieskie*> *ciala, unsigned int IloscPlanet, unsigned int IloscPlanetoid) {
-//
-//	for (int i = 0; i < IloscPlanet; i++) {
-//		ciala->push_back(new Planeta());
-//	}
-//
-//}
 
 void UkladPlanetarny::StworzUklad(std::vector<CialoNiebieskie*>* ciala, unsigned int IloscGwiazdZyjacych, unsigned int IloscPlanetSkalistych, unsigned int IloscPlanetGazowych, unsigned int IloscPlanetoid) {
 	for (int i = 0; i < IloscGwiazdZyjacych; i++) {
@@ -282,7 +217,9 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 
 					if (listaCial.at(i)->getMasa() <= (listaCial.at(j)->getMasa() / 10.0)) {
 						//delete listaCial[i];
-						zapis << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;		 listaCial.erase(listaCial.begin() + i);
+						std::cout << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;
+						zapis << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;		 
+						listaCial.erase(listaCial.begin() + i);
 						UsunZListy(i);
 
 						nObiektow -= 1;
@@ -292,6 +229,7 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 					else if (listaCial.at(i)->getMasa() >= (listaCial.at(j)->getMasa() * 10.0)) {
 						//delete listaCial[j];
 						zapis << "cialo " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
+						std::cout << "cialo " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						listaCial.erase(listaCial.begin() + j);
 						UsunZListy(j);
 
@@ -302,6 +240,7 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 					else {
 						//delete listaCial[i];
 						//delete listaCial[j];
+						std::cout << "cialo " << listaCial.at(i)->getNazwa() << " i " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						zapis << "cialo " << listaCial.at(i)->getNazwa() << " i " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						listaCial.erase(listaCial.begin() + i);
 						listaCial.erase(listaCial.begin() + j);
@@ -329,37 +268,47 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 
 }
 
-void UkladPlanetarny::ewolucja(std::vector<CialoNiebieskie*>& listaCialNiebieskich, unsigned long long int czas, int& kontrola, bool &gwiazda)
+void UkladPlanetarny::wypiszgazowe(std::ofstream& gazowe)
+{
+	for (int i = 0; i < listaPlanetGazowych.size(); i++)
+	{
+		listaPlanetGazowych.at(i)->wypiszdane(gazowe);
+	}
+}
+
+void UkladPlanetarny::ewolucja(std::vector<CialoNiebieskie*>& listaCialNiebieskich, int& kontrola, bool &gwiazda)
 {
 	if ((listaCialNiebieskich[0]->getMasa() < (czas * 10E28)) && kontrola == 0)
 	{
 		std::cout << std::endl << "Gwiazda ewoluowala" << std::endl;
 
-		//int nGwiazdZdegradowanych = 1;
-		//nGwiazdZyjacych = 0;
 		kontrola++;
 		gwiazda = false;
-		/*for (int i = 0; i < nGwiazdZdegradowanych; i++)
-		{*/
-			listaCialNiebieskich.erase(listaCialNiebieskich.begin());
-			listaGwiazdZyjacych.erase(listaGwiazdZyjacych.begin());
-			//UsunZListy(0);
-			listaGwiazdZdegradowanych.push_back(new GwiazdaZdegradowana());
-			//listaGwiazdZdegradowanych.insert(listaGwiazdZdegradowanych.begin(), new GwiazdaZdegradowana());
-			listaCialNiebieskich.insert(listaCialNiebieskich.begin(), listaGwiazdZdegradowanych.at(0));
+		listaGwiazdZdegradowanych.push_back(new GwiazdaZdegradowana(listaGwiazdZyjacych.at(0)->getMasa(), listaGwiazdZyjacych.at(0)->getPozycjaX(), listaGwiazdZyjacych.at(0)->getPozycjaY(), listaGwiazdZyjacych.at(0)->getPromien()/10.0));
+		listaCialNiebieskich.erase(listaCialNiebieskich.begin());
+		listaGwiazdZyjacych.erase(listaGwiazdZyjacych.begin());
+		
+		listaCialNiebieskich.insert(listaCialNiebieskich.begin(), listaGwiazdZdegradowanych.at(0));
 
-		//}
 	}
 }
 
-void UkladPlanetarny::WypiszObiekty() {
+void UkladPlanetarny::WypiszObiekty(bool gwiazda) {
 	std::cout << "Nazwa ukladu: " << NazwaUkladu << std::endl;
 	std::cout << "Gwiazdy zyjace: " << listaGwiazdZyjacych.size() << std::endl;
 	std::cout << "Gwiazdy zdegradowane: " << listaGwiazdZdegradowanych.size() << std::endl;
 	std::cout << "Planety skaliste: " << listaPlanetSkalistych.size() << std::endl;
 	std::cout << "Planety gazowe: " << listaPlanetGazowych.size() << std::endl;
 	std::cout << "Planetoidy: " << listaPlanetoid.size() << std::endl;
-	//std::cout << "Temperatura gwiazdy: " << listaGwiazdZyjacych.at(0)->getTemperatura() << std::endl;
+	if(gwiazda)
+	{
+		std::cout << "Temperatura gwiazdy: " << listaGwiazdZyjacych.at(0)->getTemperatura() << std::endl;
+	}
+	else
+	{
+		std::cout << "Promieniowanie gwiazdy: " << listaGwiazdZdegradowanych.at(0)->getPromieniowanie() << std::endl;
+	}
+	
 
 }
 

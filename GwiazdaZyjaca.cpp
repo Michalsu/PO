@@ -18,7 +18,7 @@ GwiazdaZyjaca::GwiazdaZyjaca()
 	Nazwa[6] = { rand() % 9 };
 	Nazwa[7] = { rand() % 9 };
 	Nazwa[8] = { '\0' };
-	Temperatura = int(getPromien() * 0.000007471428571428);
+	Temperatura = int(getPromien() * 0.000007471428571428); // Przybli¿ona temperatura na podstawie aproksymacji liniowej znanych gwiazd T=R/700000000*5230 w Kelwinach
 }
 
 char* GwiazdaZyjaca::getTypGwiazdy()

@@ -1,8 +1,8 @@
 #include "CialoNiebieskie.h"
 
 CialoNiebieskie::CialoNiebieskie() {
-	Nazwa[0] = {'C'};
-	Masa = ((long double)rand() + 1E5 / (long double)RAND_MAX *(1E8- 1E5));
+	Nazwa[0] = { 'C' };
+	Masa = ((long double)rand() + 1E5 / (long double)RAND_MAX * (1E8 - 1E5));
 	Promien = 10000;
 	PozycjaX = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
 	PozycjaY = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
@@ -38,9 +38,6 @@ CialoNiebieskie::CialoNiebieskie(long double masa, long double promien, long dou
 	PrzyspieszenieY = 0;
 }
 ;
-
-
-
 
 
 long double CialoNiebieskie::getPozycjaX()

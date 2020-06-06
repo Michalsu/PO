@@ -5,6 +5,8 @@
 
 Planetoida::Planetoida()
 {
+	PozycjaX = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
+	PozycjaY = -1E12 + ((long double)rand() / (long double)RAND_MAX * (1E12 - -1E12));
 	Nazwa[0] = { 'P' };
 	Nazwa[1] = { 'L' };
 	Nazwa[2] = { 'D' };
@@ -17,7 +19,7 @@ Planetoida::Planetoida()
 	Nazwa[9] = { '\0' };
 	Promien = 5E2  + ((long double)rand()/ (long double)RAND_MAX * (1E5 - 5E2));
 	Masa = 3000.0 + ((long double)rand() / (long double)RAND_MAX * (7000.0 - 3000.0)) * 4 / 3 * 3.14 * Promien * Promien * Promien;
-	if (rand() % 2) RzadkiePierwiastki = true;
+	if (rand() % 1) RzadkiePierwiastki = true;
 }
 
 bool Planetoida::getRzadkiePierwiastki()

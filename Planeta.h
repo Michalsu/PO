@@ -1,5 +1,8 @@
 #pragma once
 #include "CialoNiebieskie.h"
+
+/// Planeta posiada swoj czas obiegu gwiazdy i grawitacje.
+
 class Planeta :
 	public CialoNiebieskie
 {
@@ -8,8 +11,11 @@ private:
 	double Grawitacja;
 
 public:
-	Planeta();
+
+    /// Funkcja zwraca grawitacje planety
 	double getGrawitacja();
+
+	/// Funkcja zwraca czas obiegu gwiazdy planety
 	int getCzasObieguGwiazdy();
 	
 };
