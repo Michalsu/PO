@@ -216,7 +216,6 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 					std::cout << "Kolizja 2 cial" << std::endl;
 
 					if (listaCial.at(i)->getMasa() <= (listaCial.at(j)->getMasa() / 10.0)) {
-						//delete listaCial[i];
 						std::cout << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;
 						zapis << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;		 
 						listaCial.erase(listaCial.begin() + i);
@@ -227,7 +226,6 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 						if (i > 0) i--;
 					}
 					else if (listaCial.at(i)->getMasa() >= (listaCial.at(j)->getMasa() * 10.0)) {
-						//delete listaCial[j];
 						zapis << "cialo " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						std::cout << "cialo " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						listaCial.erase(listaCial.begin() + j);
@@ -238,8 +236,6 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 						if (j > 0) j--;
 					}
 					else {
-						//delete listaCial[i];
-						//delete listaCial[j];
 						std::cout << "cialo " << listaCial.at(i)->getNazwa() << " i " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						zapis << "cialo " << listaCial.at(i)->getNazwa() << " i " << listaCial.at(j)->getNazwa() << " zniszczone" << std::endl;
 						listaCial.erase(listaCial.begin() + i);
@@ -278,13 +274,13 @@ void UkladPlanetarny::wypiszgazowe(std::ofstream& gazowe)
 
 void UkladPlanetarny::ewolucja(std::vector<CialoNiebieskie*>& listaCialNiebieskich, int& kontrola, bool &gwiazda)
 {
-	if ((listaCialNiebieskich[0]->getMasa() < (czas * 10E28)) && kontrola == 0)
+	if ((rand()%60000==7) && kontrola == 0)
 	{
 		std::cout << std::endl << "Gwiazda ewoluowala" << std::endl;
 
 		kontrola++;
 		gwiazda = false;
-		listaGwiazdZdegradowanych.push_back(new GwiazdaZdegradowana(listaGwiazdZyjacych.at(0)->getMasa(), listaGwiazdZyjacych.at(0)->getPozycjaX(), listaGwiazdZyjacych.at(0)->getPozycjaY(), listaGwiazdZyjacych.at(0)->getPromien()/10.0));
+		listaGwiazdZdegradowanych.push_back(new GwiazdaZdegradowana(listaGwiazdZyjacych.at(0)->getMasa(), listaGwiazdZyjacych.at(0)->getPozycjaX(), listaGwiazdZyjacych.at(0)->getPozycjaY(), listaGwiazdZyjacych.at(0)->getPromien()/2.0));
 		listaCialNiebieskich.erase(listaCialNiebieskich.begin());
 		listaGwiazdZyjacych.erase(listaGwiazdZyjacych.begin());
 		

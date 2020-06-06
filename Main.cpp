@@ -5,6 +5,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+
+
 #include "Main.h"
 
 
@@ -86,15 +88,31 @@ void symulacjastart()
 
     std::cout << "Podaj liczbe symulowanych lat: "; // tu trzeba bêdzie dobraæ odpowiedni¹ prêdkoœæ symulacji
     std::cin >> lata;
+    if (lata < 1 || lata>50) {
+        lata = 2;
+        std::cout << "Podano nieprawidlowa wartosc, ustawiono domyslna wartosc 3" << std::endl;
+    }
 
     std::cout << std::endl << "Podaj poczatkowa liczbe planet skalistych w ukladzie: ";
     std::cin >> nPlanetSkalistych;
+    if (nPlanetSkalistych < 0 || nPlanetSkalistych>500) {
+        nPlanetSkalistych = 20;
+        std::cout << "Podano nieprawidlowa wartosc, ustawiono domyslna wartosc 20" << std::endl;
+    }
 
     std::cout << std::endl << "Podaj poczatkowa liczbe planet gazowych w ukladzie: ";
     std::cin >> nPlanetGazowych;
+    if (nPlanetGazowych < 0 || nPlanetGazowych>500) {
+        nPlanetGazowych = 20;
+        std::cout << "Podano nieprawidlowa wartosc, ustawiono domyslna wartosc 20" << std::endl;
+    }
 
     std::cout << std::endl << "Podaj liczbe planetoid w ukladzie (zalecane 300): ";
     std::cin >> nPlanetoid;
+    if (nPlanetoid < 0 || nPlanetoid>1000) {
+        nPlanetoid = 150;
+        std::cout << "Podano nieprawidlowa wartosc, ustawiono domyslna wartosc 150" << std::endl;
+    }
 
     nObiektow = nGwiazdZyjacych + nPlanetSkalistych + nPlanetGazowych + nPlanetoid + nGwiazdZdegradowanych;
 
@@ -123,12 +141,24 @@ void symulacjastart()
 
     ///////////////////////////////WYSWIETLANIE ////////////////////////////////
 
-    unsigned int height = 800, width = 1200;
+
+    /////////       STEROWANIE     ///////////
+
+    //KLAWISZ           ->     AKCJA
+
+    //STRZALKA W GORE   ->  ZWIEKSZ Tempo symulacji
+    //STRZALKA W DOL    ->  ZMNIEJSZ Tempo symulacji
+    //STRZALKA W LEWO   ->  ZMNIEJSZ Powiekszenie obiektow
+    //STRZALKA W PRAWO  ->  ZWIEKSZ Powiekszenie obiektow
+    // N                ->  WYLACZ Skupienie na gwiezdzie
+    // M                ->  WLACZ Skupienie na gwiezdzie
+
+    unsigned int height = 800, width = 800;
     long double maxH = 2E12, maxW = 2E12;
-    int mnoznikwielkosci = 10;
+    int mnoznikwielkosci = 1;
     sf::RenderWindow window(sf::VideoMode(width, height), "Solaris!");
-    float promien = listaCialNiebieskich.at(0)->getPromien() / maxH * height * mnoznikwielkosci;
     int cykl = 0;
+    bool skupienie = false;
     while (lata > uklad.LiczLata(TempoSymulacji))
     {
         uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
@@ -142,7 +172,7 @@ void symulacjastart()
             for (int i = 0; i < nObiektow; i++)
             {
 
-                zapis << "R" << i + 1 << " R " << listaCialNiebieskich[i]->getPromien() << std::endl
+                zapis << listaCialNiebieskich.at(i)->getNazwa()<< "R" << i + 1 << " R " << listaCialNiebieskich[i]->getPromien() << std::endl
                     << " M " << listaCialNiebieskich[i]->getMasa() << std::endl <<
                     " pX " << listaCialNiebieskich[i]->getPozycjaX() << std::endl <<
                     " pY " << listaCialNiebieskich[i]->getPozycjaY() << std::endl <<
@@ -160,15 +190,37 @@ void symulacjastart()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && TempoSymulacji<1000)
             {
                 TempoSymulacji *= 1.1;
-                std::cout << TempoSymulacji << std::endl;
+                std::cout << "Tempo symulacji " << TempoSymulacji << std::endl;
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && TempoSymulacji> 0.01)
             {
                 TempoSymulacji /= 1.1;
-                std::cout << TempoSymulacji << std::endl;
+                std::cout << "Tempo symulacji " << TempoSymulacji << std::endl;
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&& mnoznikwielkosci>1)
+            {
+                mnoznikwielkosci -= 10;
+                std::cout << "Powiekszenie obiektow "<<mnoznikwielkosci << std::endl;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && mnoznikwielkosci<200)
+            {
+                mnoznikwielkosci += 10;
+                std::cout << "Powiekszenie obiektow " << mnoznikwielkosci << std::endl;
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+            {
+                skupienie = false;
+                std::cout << "Skupienie wylaczone " << std::endl;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+            {
+                skupienie = true;
+                std::cout << "Skupienie wlaczone " << std::endl;
             }
 
             if (event.type == sf::Event::Closed)
@@ -179,11 +231,19 @@ void symulacjastart()
 
         for (int i = 0; i < listaCialNiebieskich.size(); i++)
         {
-            sf::CircleShape shape(listaCialNiebieskich.at(i)->getPromien() / maxH * height * mnoznikwielkosci);
+            int tempPromien;
+            tempPromien = listaCialNiebieskich.at(i)->getPromien() / maxH * height * mnoznikwielkosci;
             
-            shape.setPosition(-listaCialNiebieskich.at(i)->getPozycjaY() / maxW * width + width / 2, -listaCialNiebieskich.at(i)->getPozycjaX() / maxH * height + height / 2);
-           
-            shape.setFillColor(sf::Color(100, 250, 50));
+            sf::CircleShape shape(tempPromien);
+            if (tempPromien < 0.75) shape.setRadius(0.75);
+            
+            if (skupienie) shape.setPosition((listaCialNiebieskich.at(0)->getPozycjaX() -listaCialNiebieskich.at(i)->getPozycjaX()) / maxW * width + width / 2 - tempPromien,(listaCialNiebieskich.at(0)->getPozycjaY() -listaCialNiebieskich.at(i)->getPozycjaY()) / maxH * height + height / 2 - tempPromien);
+            else shape.setPosition(-listaCialNiebieskich.at(i)->getPozycjaX() / maxW * width + width / 2 -tempPromien, -listaCialNiebieskich.at(i)->getPozycjaY() / maxH * height + height / 2 - tempPromien);
+            if (listaCialNiebieskich.at(i)->getNazwa()[1] == 'S') shape.setFillColor(sf::Color::Green);
+            else if (listaCialNiebieskich.at(i)->getNazwa()[0] == 'G') shape.setFillColor(sf::Color::Blue);
+            else if (listaCialNiebieskich.at(i)->getNazwa()[1] == 'Y') shape.setFillColor(sf::Color::Yellow);
+            else if (listaCialNiebieskich.at(i)->getNazwa()[2] == 'D') shape.setFillColor(sf::Color::White);
+            else shape.setFillColor(sf::Color::Magenta);
 
             // copy shape to vector
             kuleczki.push_back(shape);
@@ -199,34 +259,6 @@ void symulacjastart()
 
 
 
-    //for (int i = 0; i < czas; i++)
-    //    //while (czas > uklad.LiczLata(TempoSymulacji, czas))
-    //{
-    //    uklad.AktualizujPrzyspieszenie(listaCialNiebieskich);
-    //    uklad.AktualizujPredkosc(listaCialNiebieskich, TempoSymulacji);
-    //    uklad.AktualizujPozycje(listaCialNiebieskich, TempoSymulacji);
-    //    uklad.SprawdzKolizje(listaCialNiebieskich, nObiektow, zapis, liczbakolizji);
-    //    uklad.ewolucja(listaCialNiebieskich, czas, kontrola, gwiazda);
-
-    //    if (i % 100) {
-
-    //        for (int i = 0; i < nObiektow; i++)
-    //        {
-
-    //            zapis << "R" << i + 1 << " R " << listaCialNiebieskich[i]->getPromien() << std::endl
-    //                << " M " << listaCialNiebieskich[i]->getMasa() << std::endl <<
-    //                " pX " << listaCialNiebieskich[i]->getPozycjaX() << std::endl <<
-    //                " pY " << listaCialNiebieskich[i]->getPozycjaY() << std::endl <<
-    //                " vX " << listaCialNiebieskich[i]->getPredkoscX() << std::endl <<
-    //                " vY " << listaCialNiebieskich[i]->getPredkoscY() << std::endl <<
-    //                " aX " << listaCialNiebieskich[i]->getPrzyspieszenieX() << std::endl <<
-    //                " aY" << listaCialNiebieskich[i]->getPrzyspieszenieY() << std::endl;
-    //        }
-    //    }
-
-    //    //cykl++;
-
-    //}
     zapis.close();
     system("cls");
     std::cout << "Koncowy stan:" << std::endl;
@@ -241,8 +273,6 @@ void symulacjastart()
 
 
 }
-
-
 
 
 
