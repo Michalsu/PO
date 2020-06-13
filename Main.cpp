@@ -1,5 +1,6 @@
 #include "UkladPlanetarny.h"
 
+/// Do dzialania programu wymagana jest biblioteka SFML!!!
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -37,7 +38,7 @@ void menu()
 
     case '2':
         system("cls");
-        std::cout << std::ifstream("zapisdobrychplanet.txt").rdbuf(); 
+        std::cout << std::ifstream("zapisdobrychplanet.txt").rdbuf();
         std::cout << std::endl << "kliknij zeby wrocic do menu";
         getch();
         main();
@@ -79,35 +80,35 @@ void symulacjastart()
     int liczbakolizji = 0;
     int kontrola = 0;
 
-    double TempoSymulacji =1.00;
+    double TempoSymulacji = 1.00;
     unsigned int nObiektow;
 
     unsigned int lata;
 
     system("cls");
 
-    std::cout << "Podaj liczbe symulowanych lat: "; // tu trzeba bêdzie dobraæ odpowiedni¹ prêdkoœæ symulacji
+    std::cout << "Podaj liczbe symulowanych lat (przy podstawowym tempie symulacji 1 rok to kilka minut): "; 
     std::cin >> lata;
     if (lata < 1 || lata>50) {
         lata = 2;
         std::cout << "Podano nieprawidlowa wartosc, ustawiono domyslna wartosc 3" << std::endl;
     }
 
-    std::cout << std::endl << "Podaj poczatkowa liczbe planet skalistych w ukladzie: ";
+    std::cout << std::endl << "Podaj poczatkowa liczbe planet skalistych w ukladzie (zalecana ilosc okolo 20): ";
     std::cin >> nPlanetSkalistych;
     if (nPlanetSkalistych < 0 || nPlanetSkalistych>500) {
         nPlanetSkalistych = 20;
         std::cout << "Podano nieprawidlowa wartosc, ustawiono domyslna wartosc 20" << std::endl;
     }
 
-    std::cout << std::endl << "Podaj poczatkowa liczbe planet gazowych w ukladzie: ";
+    std::cout << std::endl << "Podaj poczatkowa liczbe planet gazowych w ukladzie (zalecana ilosc okolo 20): ";
     std::cin >> nPlanetGazowych;
     if (nPlanetGazowych < 0 || nPlanetGazowych>500) {
         nPlanetGazowych = 20;
         std::cout << "Podano nieprawidlowa wartosc, ustawiono domyslna wartosc 20" << std::endl;
     }
 
-    std::cout << std::endl << "Podaj liczbe planetoid w ukladzie (zalecane 300): ";
+    std::cout << std::endl << "Podaj liczbe planetoid w ukladzie (zalecane 150): ";
     std::cin >> nPlanetoid;
     if (nPlanetoid < 0 || nPlanetoid>1000) {
         nPlanetoid = 150;
@@ -123,8 +124,18 @@ void symulacjastart()
     uklad.nazwij();
 
     system("cls");
-    std::cout << "Tworzymy uklad i przeprowadzamy symulacje..." << std::endl << "Czekaj na wyniki... Ponizej wyswietlamy wazniejsze wydarzenia"
-        << std::endl;
+    std::cout << "Uklad jest tworzony..." << std::endl << std::endl <<
+        "Ponizej instrukcja obslugi symulacji, kiknij na okno z planetami zeby moc uzywac komend"
+        << std::endl << std::endl;
+
+    std::cout << std::endl << "STRZALKA W GORE   ->  ZWIEKSZ Tempo symulacji" << std::endl <<
+        "STRZALKA W DOL    ->  ZMNIEJSZ Tempo symulacji" << std::endl <<
+        "STRZALKA W LEWO   ->  ZMNIEJSZ Powiekszenie obiektow" << std::endl <<
+        "STRZALKA W PRAWO  ->  ZWIEKSZ Powiekszenie obiektow" << std::endl <<
+        "N                ->  WYLACZ Skupienie na gwiezdzie" << std::endl <<
+        "M                ->  WLACZ Skupienie na gwiezdzie" << std::endl;
+
+    std::cout << std::endl << "Ponizej wypisujemy wazne wydarzenia jak np kolizje obiektow:" << std::endl;
 
     uklad.StworzUklad(&listaCialNiebieskich, nGwiazdZyjacych, nPlanetSkalistych, nPlanetGazowych, nPlanetoid);
     std::ofstream zapis;
@@ -133,25 +144,6 @@ void symulacjastart()
     zapis.open("zapisprzebiegusymulacji.txt");
     wynik.open("zapisdobrychplanet.txt");
     gazowe.open("zapisgazowychplanet.txt");
-
-    //int cykl = 0;
-
-
-
-
-    ///////////////////////////////WYSWIETLANIE ////////////////////////////////
-
-
-    /////////       STEROWANIE     ///////////
-
-    //KLAWISZ           ->     AKCJA
-
-    //STRZALKA W GORE   ->  ZWIEKSZ Tempo symulacji
-    //STRZALKA W DOL    ->  ZMNIEJSZ Tempo symulacji
-    //STRZALKA W LEWO   ->  ZMNIEJSZ Powiekszenie obiektow
-    //STRZALKA W PRAWO  ->  ZWIEKSZ Powiekszenie obiektow
-    // N                ->  WYLACZ Skupienie na gwiezdzie
-    // M                ->  WLACZ Skupienie na gwiezdzie
 
     unsigned int height = 800, width = 800;
     long double maxH = 2E12, maxW = 2E12;
@@ -172,7 +164,7 @@ void symulacjastart()
             for (int i = 0; i < nObiektow; i++)
             {
 
-                zapis << listaCialNiebieskich.at(i)->getNazwa()<< "R" << i + 1 << " R " << listaCialNiebieskich[i]->getPromien() << std::endl
+                zapis << listaCialNiebieskich.at(i)->getNazwa() << "R" << i + 1 << " R " << listaCialNiebieskich[i]->getPromien() << std::endl
                     << " M " << listaCialNiebieskich[i]->getMasa() << std::endl <<
                     " pX " << listaCialNiebieskich[i]->getPozycjaX() << std::endl <<
                     " pY " << listaCialNiebieskich[i]->getPozycjaY() << std::endl <<
@@ -190,23 +182,23 @@ void symulacjastart()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && TempoSymulacji<1000)
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && TempoSymulacji < 100)
             {
                 TempoSymulacji *= 1.1;
                 std::cout << "Tempo symulacji " << TempoSymulacji << std::endl;
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && TempoSymulacji> 0.01)
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && TempoSymulacji > 0.01)
             {
                 TempoSymulacji /= 1.1;
                 std::cout << "Tempo symulacji " << TempoSymulacji << std::endl;
             }
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&& mnoznikwielkosci>1)
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && mnoznikwielkosci > 1)
             {
                 mnoznikwielkosci -= 10;
-                std::cout << "Powiekszenie obiektow "<<mnoznikwielkosci << std::endl;
+                std::cout << "Powiekszenie obiektow " << mnoznikwielkosci << std::endl;
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && mnoznikwielkosci<200)
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && mnoznikwielkosci < 200)
             {
                 mnoznikwielkosci += 10;
                 std::cout << "Powiekszenie obiektow " << mnoznikwielkosci << std::endl;
@@ -233,12 +225,12 @@ void symulacjastart()
         {
             int tempPromien;
             tempPromien = listaCialNiebieskich.at(i)->getPromien() / maxH * height * mnoznikwielkosci;
-            
+
             sf::CircleShape shape(tempPromien);
             if (tempPromien < 0.75) shape.setRadius(0.75);
-            
-            if (skupienie) shape.setPosition((listaCialNiebieskich.at(0)->getPozycjaX() -listaCialNiebieskich.at(i)->getPozycjaX()) / maxW * width + width / 2 - tempPromien,(listaCialNiebieskich.at(0)->getPozycjaY() -listaCialNiebieskich.at(i)->getPozycjaY()) / maxH * height + height / 2 - tempPromien);
-            else shape.setPosition(-listaCialNiebieskich.at(i)->getPozycjaX() / maxW * width + width / 2 -tempPromien, -listaCialNiebieskich.at(i)->getPozycjaY() / maxH * height + height / 2 - tempPromien);
+
+            if (skupienie) shape.setPosition((listaCialNiebieskich.at(0)->getPozycjaX() - listaCialNiebieskich.at(i)->getPozycjaX()) / maxW * width + width / 2 - tempPromien, (listaCialNiebieskich.at(0)->getPozycjaY() - listaCialNiebieskich.at(i)->getPozycjaY()) / maxH * height + height / 2 - tempPromien);
+            else shape.setPosition(-listaCialNiebieskich.at(i)->getPozycjaX() / maxW * width + width / 2 - tempPromien, -listaCialNiebieskich.at(i)->getPozycjaY() / maxH * height + height / 2 - tempPromien);
             if (listaCialNiebieskich.at(i)->getNazwa()[1] == 'S') shape.setFillColor(sf::Color::Green);
             else if (listaCialNiebieskich.at(i)->getNazwa()[0] == 'G') shape.setFillColor(sf::Color::Blue);
             else if (listaCialNiebieskich.at(i)->getNazwa()[1] == 'Y') shape.setFillColor(sf::Color::Yellow);
@@ -307,16 +299,26 @@ int main()
     case '2':
         system("cls");
         std::cout << std::ifstream("zapisdobrychplanet.txt").rdbuf();
+        std::cout << std::endl << "kliknij zeby wrocic do menu";
+        getch();
+        main();
+
         break;
 
     case '3':
         system("cls");
         std::cout << std::ifstream("zapisgazowychplanet.txt").rdbuf();
+        std::cout << std::endl << "kliknij zeby wrocic do menu";
+        getch();
+        main();
         break;
 
     case '4':
         system("cls");
         std::cout << std::ifstream("zapisprzebiegusymulacji.txt").rdbuf();
+        std::cout << std::endl << "kliknij zeby wrocic do menu";
+        getch();
+        main();
         break;
 
     case '5':

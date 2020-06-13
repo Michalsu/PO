@@ -32,8 +32,6 @@ private:
 	
 public:
 
-	// czemu bez tych konstruktorow aplikacja nie dziala?
-
 	CialoNiebieskie();
 	CialoNiebieskie(long double masa, long double promien);
 	CialoNiebieskie(long double masa, long double promien, long double pozycjax, long double pozycjay);

@@ -18,6 +18,7 @@ GwiazdaZdegradowana::GwiazdaZdegradowana(long double masa, long double posX, lon
 	PozycjaX = posX;
 	PozycjaY = posY;
 	Promien = promien;
+	Promieniowanie = rand() % 100;
 }
 
 double GwiazdaZdegradowana::getPromieniowanie()

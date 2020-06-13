@@ -46,7 +46,7 @@ void UkladPlanetarny::wypiszplanety(std::ofstream& wynik, bool gwiazda)
 		}
 		std::cout << std::endl << "liczba planet zdolnych do kolonizacji to:  " << liczbaplanet << std::endl;
 	}
-	
+
 	if (gwiazda == false)
 		wynik << "Gwiazda ewoluowala i nie ma planet zdatnych do kolonizacji";
 
@@ -217,7 +217,7 @@ void UkladPlanetarny::SprawdzKolizje(std::vector<CialoNiebieskie*>& listaCial, u
 
 					if (listaCial.at(i)->getMasa() <= (listaCial.at(j)->getMasa() / 10.0)) {
 						std::cout << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;
-						zapis << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;		 
+						zapis << "cialo " << listaCial.at(i)->getNazwa() << " zniszczone" << std::endl;
 						listaCial.erase(listaCial.begin() + i);
 						UsunZListy(i);
 
@@ -272,18 +272,18 @@ void UkladPlanetarny::wypiszgazowe(std::ofstream& gazowe)
 	}
 }
 
-void UkladPlanetarny::ewolucja(std::vector<CialoNiebieskie*>& listaCialNiebieskich, int& kontrola, bool &gwiazda)
+void UkladPlanetarny::ewolucja(std::vector<CialoNiebieskie*>& listaCialNiebieskich, int& kontrola, bool& gwiazda)
 {
-	if ((rand()%60000==7) && kontrola == 0)
+	if ((rand() % 60000 == 7) && kontrola == 0)
 	{
 		std::cout << std::endl << "Gwiazda ewoluowala" << std::endl;
 
 		kontrola++;
 		gwiazda = false;
-		listaGwiazdZdegradowanych.push_back(new GwiazdaZdegradowana(listaGwiazdZyjacych.at(0)->getMasa(), listaGwiazdZyjacych.at(0)->getPozycjaX(), listaGwiazdZyjacych.at(0)->getPozycjaY(), listaGwiazdZyjacych.at(0)->getPromien()/2.0));
+		listaGwiazdZdegradowanych.push_back(new GwiazdaZdegradowana(listaGwiazdZyjacych.at(0)->getMasa(), listaGwiazdZyjacych.at(0)->getPozycjaX(), listaGwiazdZyjacych.at(0)->getPozycjaY(), listaGwiazdZyjacych.at(0)->getPromien() / 2.0));
 		listaCialNiebieskich.erase(listaCialNiebieskich.begin());
 		listaGwiazdZyjacych.erase(listaGwiazdZyjacych.begin());
-		
+
 		listaCialNiebieskich.insert(listaCialNiebieskich.begin(), listaGwiazdZdegradowanych.at(0));
 
 	}
@@ -296,7 +296,7 @@ void UkladPlanetarny::WypiszObiekty(bool gwiazda) {
 	std::cout << "Planety skaliste: " << listaPlanetSkalistych.size() << std::endl;
 	std::cout << "Planety gazowe: " << listaPlanetGazowych.size() << std::endl;
 	std::cout << "Planetoidy: " << listaPlanetoid.size() << std::endl;
-	if(gwiazda)
+	if (gwiazda)
 	{
 		std::cout << "Temperatura gwiazdy: " << listaGwiazdZyjacych.at(0)->getTemperatura() << std::endl;
 	}
@@ -304,7 +304,7 @@ void UkladPlanetarny::WypiszObiekty(bool gwiazda) {
 	{
 		std::cout << "Promieniowanie gwiazdy: " << listaGwiazdZdegradowanych.at(0)->getPromieniowanie() << std::endl;
 	}
-	
+
 
 }
 
